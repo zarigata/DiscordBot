@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 import logging
 import colorlog
 from datetime import datetime
-from web.dashboard import app
+from web.dashboard import setup_dashboard, run_dashboard, app
 
 # Load environment variables
 load_dotenv()
@@ -34,32 +34,54 @@ intents = discord.Intents.default()
 intents.message_content = True
 intents.voice_states = True
 bot = commands.Bot(command_prefix='!', intents=intents)
-bot.start_time = datetime.now()
 
 @bot.event
 async def on_ready():
     logger.info(f'Logged in as {bot.user}')
 
 async def load_cogs():
-    """Load all cogs."""
-    try:
-        await bot.load_extension('bot.cogs.music')
-        await bot.load_extension('bot.cogs.music_display')
-        logger.info("Successfully loaded all cogs")
-    except Exception as e:
-        logger.error(f"Error loading cogs: {e}")
+    """Load all cogs"""
+    for filename in os.listdir('./bot/cogs'):
+        if filename.endswith('.py'):
+            try:
+                await bot.load_extension(f'bot.cogs.{filename[:-3]}')
+                print(f'Loaded {filename}')
+            except Exception as e:
+                print(f'Failed to load {filename}: {str(e)}')
 
 async def main():
     """Main function to start the bot and web dashboard."""
-    await load_cogs()
-    
-    # Start Flask in a separate thread
-    import threading
-    threading.Thread(target=lambda: app.run(host='0.0.0.0', port=5000, use_reloader=False)).start()
-    
-    # Start the bot
-    await bot.start(TOKEN)
+    try:
+        # Load cogs first
+        await load_cogs()
+        
+        # Start the bot
+        bot.start_time = datetime.now()
+        await bot.start(TOKEN)
+        
+    except Exception as e:
+        logger.error(f"Error starting bot: {e}")
+        raise
 
-if __name__ == '__main__':
+if __name__ == "__main__":
+    # Setup logging
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        handlers=[
+            logging.StreamHandler(),
+            logging.FileHandler('bot.log')
+        ]
+    )
+    
+    # Initialize Flask dashboard
+    setup_dashboard(bot)
+    
+    # Run the dashboard in a separate thread
+    from threading import Thread
+    dashboard_thread = Thread(target=run_dashboard, daemon=True)
+    dashboard_thread.start()
+    
+    # Run the bot
     import asyncio
     asyncio.run(main())

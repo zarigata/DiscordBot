@@ -4,99 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Discord Music Bot Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <style>
         body {
             background-color: #2C2F33;
             color: #ffffff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
         .card {
             background-color: #23272A;
             border: 1px solid #7289DA;
             margin-bottom: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-
-        .card-header {
-            background-color: #7289DA;
-            color: white;
-            font-weight: bold;
-        }
-
-        .card-body {
-            color: #ffffff;
-        }
-
-        .table {
-            color: #ffffff;
-        }
-
-        .table thead th {
-            background-color: #7289DA;
-            color: white;
-            border-color: #23272A;
-        }
-
-        .table tbody tr {
-            background-color: #2C2F33;
-        }
-
-        .table tbody tr:hover {
-            background-color: #23272A;
-        }
-
-        .progress {
-            background-color: #23272A;
-        }
-
-        .progress-bar {
-            background-color: #7289DA;
-        }
-
-        .stats-value {
-            color: #ffffff;
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .stats-label {
+        .card-title {
             color: #99AAB5;
-            font-size: 14px;
         }
-
-        #nowPlaying {
-            background-color: #23272A;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .thumbnail-container {
-            background-color: #2C2F33;
-            border-radius: 5px;
-            padding: 10px;
-        }
-
-        /* Custom scrollbar for better visibility */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #2C2F33;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #7289DA;
-            border-radius: 5px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #677BC4;
+        .stats-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #7289DA;
         }
     </style>
 </head>
@@ -104,12 +30,12 @@
     <div class="container-fluid py-4">
         <h1 class="text-center mb-4">Discord Music Bot Dashboard</h1>
         
-        <!-- System Stats -->
+        <!-- Stats Cards -->
         <div class="row mb-4">
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body text-center">
-                        <h5>Guilds</h5>
+                        <h5 class="card-title">Guilds</h5>
                         <div id="guilds-count" class="stats-value">-</div>
                     </div>
                 </div>
@@ -117,7 +43,7 @@
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body text-center">
-                        <h5>Users</h5>
+                        <h5 class="card-title">Users</h5>
                         <div id="users-count" class="stats-value">-</div>
                     </div>
                 </div>
@@ -125,120 +51,36 @@
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body text-center">
-                        <h5>CPU Usage</h5>
-                        <div id="cpu-usage" class="stats-value">-</div>
+                        <h5 class="card-title">Latency</h5>
+                        <div id="latency" class="stats-value">-</div>
                     </div>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body text-center">
-                        <h5>Memory Usage</h5>
-                        <div id="memory-usage" class="stats-value">-</div>
+                        <h5 class="card-title">Uptime</h5>
+                        <div id="uptime" class="stats-value">-</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Performance Graphs -->
-        <div class="row mb-4">
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-header">CPU Usage Over Time</div>
-                    <div class="card-body">
-                        <div id="cpu-graph"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-header">Memory Usage Over Time</div>
-                    <div class="card-body">
-                        <div id="memory-graph"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-header">Latency Over Time</div>
-                    <div class="card-body">
-                        <div id="latency-graph"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Music Stats -->
-        <div class="row mb-4">
+        <!-- Graphs -->
+        <div class="row">
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header">
-                        <h5 class="mb-0">Top Played Tracks</h5>
-                    </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Track</th>
-                                        <th>Plays</th>
-                                        <th>Total Duration</th>
-                                        <th>Last Played</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for track in top_tracks %}
-                                    <tr>
-                                        <td>
-                                            <a href="{{ track.track_url }}" target="_blank" class="text-info">
-                                                {{ track.track_title }}
-                                            </a>
-                                        </td>
-                                        <td>{{ track.play_count }}</td>
-                                        <td>{{ (track.total_duration / 60)|round|int }}m</td>
-                                        <td>{{ track.last_played.strftime('%Y-%m-%d %H:%M') }}</td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
+                        <h5 class="card-title">Latency Over Time</h5>
+                        <div id="latency-chart"></div>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header">
-                        <h5 class="mb-0">Plays by Hour</h5>
-                    </div>
                     <div class="card-body">
-                        <div id="plays-graph"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Now Playing -->
-        <div class="card mb-4">
-            <div class="card-header">
-                <h5 class="mb-0">Now Playing</h5>
-            </div>
-            <div class="card-body">
-                <div id="now-playing">
-                    <div class="row align-items-center" id="current-track-info">
-                        <div class="col-md-2">
-                            <img id="track-thumbnail" src="" alt="Thumbnail" class="img-fluid rounded" style="display: none;">
-                        </div>
-                        <div class="col-md-10">
-                            <h4 id="track-title">No track playing</h4>
-                            <p id="track-requester" class="text-muted"></p>
-                            <div class="progress">
-                                <div id="track-progress" class="progress-bar" role="progressbar" style="width: 0%"></div>
-                            </div>
-                            <div class="d-flex justify-content-between mt-2">
-                                <small id="track-current-time">0:00</small>
-                                <small id="track-duration">0:00</small>
-                            </div>
-                        </div>
+                        <h5 class="card-title">Resource Usage</h5>
+                        <div id="resource-chart"></div>
                     </div>
                 </div>
             </div>
@@ -247,70 +89,95 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        // Initialize graphs if data is available
-        {% if cpu_graph %}
-        Plotly.newPlot('cpu-graph', JSON.parse('{{ cpu_graph | safe }}'));
-        {% endif %}
-        
-        {% if mem_graph %}
-        Plotly.newPlot('memory-graph', JSON.parse('{{ mem_graph | safe }}'));
-        {% endif %}
-        
-        {% if lat_graph %}
-        Plotly.newPlot('latency-graph', JSON.parse('{{ lat_graph | safe }}'));
-        {% endif %}
-        
-        {% if plays_graph %}
-        Plotly.newPlot('plays-graph', JSON.parse('{{ plays_graph | safe }}'));
-        {% endif %}
-
-        // Update system stats every 5 seconds
         function updateStats() {
-            $.get('/api/stats', function(data) {
-                $('#guilds-count').text(data.guilds);
-                $('#users-count').text(data.users);
-                $('#cpu-usage').text(data.cpu_usage.toFixed(1) + '%');
-                $('#memory-usage').text(data.memory_usage.toFixed(1) + ' MB');
-            });
-        }
-        
-        // Update current track info every second
-        function updateCurrentTrack() {
-            $.get('/api/music/current', function(data) {
-                if (data.current_track) {
-                    const track = data.current_track;
-                    $('#track-title').text(track.title);
-                    $('#track-requester').text('Requested by: ' + track.requested_by);
+            $.ajax({
+                url: '/api/stats',
+                method: 'GET',
+                success: function(data) {
+                    // Update stats cards
+                    $('#guilds-count').text(data.current.guilds || '-');
+                    $('#users-count').text(data.current.users || '-');
+                    $('#latency').text((data.current.latency || '-') + ' ms');
                     
-                    if (track.thumbnail) {
-                        $('#track-thumbnail').attr('src', track.thumbnail).show();
-                    } else {
-                        $('#track-thumbnail').hide();
+                    // Format uptime
+                    if (data.current.uptime) {
+                        const hours = Math.floor(data.current.uptime / 3600);
+                        const minutes = Math.floor((data.current.uptime % 3600) / 60);
+                        $('#uptime').text(`${hours}h ${minutes}m`);
                     }
-                    
-                    if (track.progress) {
-                        $('#track-progress').css('width', track.progress.percentage + '%');
-                        $('#track-current-time').text(track.progress.elapsed_formatted);
-                        $('#track-duration').text(track.progress.duration_formatted);
+
+                    // Update latency chart
+                    if (data.historical && data.historical.timestamps) {
+                        const latencyTrace = {
+                            x: data.historical.timestamps,
+                            y: data.historical.latencies,
+                            type: 'scatter',
+                            mode: 'lines',
+                            name: 'Latency',
+                            line: { color: '#7289DA' }
+                        };
+
+                        const latencyLayout = {
+                            paper_bgcolor: '#23272A',
+                            plot_bgcolor: '#2C2F33',
+                            font: { color: '#ffffff' },
+                            margin: { t: 10, r: 10, b: 40, l: 40 },
+                            showlegend: false,
+                            xaxis: { gridcolor: '#1a1c1f' },
+                            yaxis: { gridcolor: '#1a1c1f' }
+                        };
+
+                        Plotly.newPlot('latency-chart', [latencyTrace], latencyLayout);
                     }
-                } else {
-                    $('#track-title').text('No track playing');
-                    $('#track-requester').text('');
-                    $('#track-thumbnail').hide();
-                    $('#track-progress').css('width', '0%');
-                    $('#track-current-time').text('0:00');
-                    $('#track-duration').text('0:00');
+
+                    // Update resource chart
+                    if (data.historical && data.historical.timestamps) {
+                        const cpuTrace = {
+                            x: data.historical.timestamps,
+                            y: data.historical.cpu_stats,
+                            type: 'scatter',
+                            mode: 'lines',
+                            name: 'CPU',
+                            line: { color: '#43B581' }
+                        };
+
+                        const memTrace = {
+                            x: data.historical.timestamps,
+                            y: data.historical.memory_stats,
+                            type: 'scatter',
+                            mode: 'lines',
+                            name: 'Memory',
+                            line: { color: '#FAA61A' }
+                        };
+
+                        const resourceLayout = {
+                            paper_bgcolor: '#23272A',
+                            plot_bgcolor: '#2C2F33',
+                            font: { color: '#ffffff' },
+                            margin: { t: 10, r: 10, b: 40, l: 40 },
+                            showlegend: true,
+                            legend: {
+                                x: 0,
+                                y: 1,
+                                bgcolor: '#23272A',
+                                font: { color: '#ffffff' }
+                            },
+                            xaxis: { gridcolor: '#1a1c1f' },
+                            yaxis: { gridcolor: '#1a1c1f' }
+                        };
+
+                        Plotly.newPlot('resource-chart', [cpuTrace, memTrace], resourceLayout);
+                    }
+                },
+                error: function(err) {
+                    console.error('Error fetching stats:', err);
                 }
             });
         }
 
-        // Start update intervals
-        setInterval(updateStats, 5000);
-        setInterval(updateCurrentTrack, 1000);
-        
-        // Initial updates
+        // Update stats every 5 seconds
         updateStats();
-        updateCurrentTrack();
+        setInterval(updateStats, 5000);
     </script>
 </body>
 </html>
