@@ -127,41 +127,93 @@ class MusicDisplay(commands.Cog):
         
         return buttons
 
+    async def ensure_channel(self, guild):
+        """Ensure music-bot channel exists and return it"""
+        channel = discord.utils.get(guild.text_channels, name="music-bot")
+        if not channel:
+            # Create channel with proper permissions
+            overwrites = {
+                guild.default_role: discord.PermissionOverwrite(send_messages=False),
+                guild.me: discord.PermissionOverwrite(send_messages=True, manage_messages=True)
+            }
+            try:
+                channel = await guild.create_text_channel('music-bot', overwrites=overwrites)
+            except discord.Forbidden:
+                return None
+        return channel
+
+    async def get_or_create_message(self, guild_id):
+        """Get existing message or create a new one"""
+        guild = self.bot.get_guild(guild_id)
+        if not guild:
+            return None
+
+        channel = await self.ensure_channel(guild)
+        if not channel:
+            return None
+
+        # Try to get existing message
+        message_id = self.music_messages.get(guild_id)
+        if message_id:
+            try:
+                return await channel.fetch_message(message_id)
+            except (discord.NotFound, discord.Forbidden, discord.HTTPException):
+                pass
+
+        # Clean up old messages
+        try:
+            async for message in channel.history(limit=10):
+                if message.author == self.bot.user:
+                    await message.delete()
+        except discord.HTTPException:
+            pass
+
+        # Create new message
+        embed = await self.get_music_embed(guild_id)
+        if not embed:
+            embed = discord.Embed(
+                title="Music Player",
+                description="No music playing. Use !play [song name/URL] to play something!",
+                color=discord.Color.blue()
+            )
+
+        buttons = await self.create_button_controls()
+        try:
+            message = await channel.send(embed=embed, view=buttons)
+            self.music_messages[guild_id] = message.id
+            return message
+        except discord.HTTPException as e:
+            print(f"Error sending message: {e}")
+            return None
+
+    @commands.Cog.listener()
+    async def on_ready(self):
+        """Initialize music display for all guilds when bot starts"""
+        for guild in self.bot.guilds:
+            await self.get_or_create_message(guild.id)
+
+    @commands.Cog.listener()
+    async def on_guild_join(self, guild):
+        """Create music display when bot joins a new guild"""
+        await self.get_or_create_message(guild.id)
+
     @tasks.loop(seconds=10.0)
     async def update_display(self):
         """Update all music display messages"""
-        for guild_id, message_id in self.music_messages.items():
+        for guild_id in [guild.id for guild in self.bot.guilds]:
             try:
-                guild = self.bot.get_guild(guild_id)
-                if not guild:
+                message = await self.get_or_create_message(guild_id)
+                if not message:
                     continue
-
-                channel = discord.utils.get(guild.text_channels, name="music-bot")
-                if not channel:
-                    continue
-
-                try:
-                    message = await channel.fetch_message(message_id)
-                except discord.NotFound:
-                    message = None
 
                 embed = await self.get_music_embed(guild_id)
                 if not embed:
                     continue
 
-                if message:
-                    await message.edit(embed=embed)
-                else:
-                    buttons = await self.create_button_controls()
-                    new_message = await channel.send(embed=embed, view=buttons)
-                    self.music_messages[guild_id] = new_message.id
+                await message.edit(embed=embed)
 
             except Exception as e:
-                print(f"Error updating music display: {e}")
-
-    @update_display.before_loop
-    async def before_update_display(self):
-        await self.bot.wait_until_ready()
+                print(f"Error updating music display for guild {guild_id}: {e}")
 
     @commands.Cog.listener()
     async def on_interaction(self, interaction: discord.Interaction):
@@ -215,6 +267,10 @@ class MusicDisplay(commands.Cog):
 
         except Exception as e:
             await interaction.response.send_message(f"Error: {str(e)}", ephemeral=True)
+
+    @update_display.before_loop
+    async def before_update_display(self):
+        await self.bot.wait_until_ready()
 
 async def setup(bot):
     await bot.add_cog(MusicDisplay(bot))

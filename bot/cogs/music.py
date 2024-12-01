@@ -111,6 +111,57 @@ class YTDLSource(discord.PCMVolumeTransformer):
                 logger.error(f"Extracted data: {data}")
             raise
 
+class MusicButtons(discord.ui.View):
+    def __init__(self, cog):
+        super().__init__(timeout=None)
+        self.cog = cog
+
+    @discord.ui.button(label="🔉", style=discord.ButtonStyle.secondary, custom_id="volume_down")
+    async def volume_down(self, interaction: discord.Interaction, button: discord.ui.Button):
+        ctx = await interaction.client.get_context(interaction.message)
+        if not ctx.voice_client or not ctx.voice_client.source:
+            await interaction.response.send_message("Nothing is playing!", ephemeral=True)
+            return
+        current_volume = ctx.voice_client.source.volume
+        new_volume = max(0.0, current_volume - 0.2)
+        ctx.voice_client.source.volume = new_volume
+        await interaction.response.send_message(f"Volume set to {int(new_volume * 100)}%", ephemeral=True)
+
+    @discord.ui.button(label="⏯️", style=discord.ButtonStyle.primary, custom_id="play_pause")
+    async def play_pause(self, interaction: discord.Interaction, button: discord.ui.Button):
+        ctx = await interaction.client.get_context(interaction.message)
+        if not ctx.voice_client:
+            await interaction.response.send_message("Not connected to a voice channel!", ephemeral=True)
+            return
+        if ctx.voice_client.is_paused():
+            ctx.voice_client.resume()
+            await interaction.response.send_message("▶️ Resumed", ephemeral=True)
+        elif ctx.voice_client.is_playing():
+            ctx.voice_client.pause()
+            await interaction.response.send_message("⏸️ Paused", ephemeral=True)
+        else:
+            await interaction.response.send_message("Nothing is playing!", ephemeral=True)
+
+    @discord.ui.button(label="⏭️", style=discord.ButtonStyle.primary, custom_id="skip")
+    async def skip(self, interaction: discord.Interaction, button: discord.ui.Button):
+        ctx = await interaction.client.get_context(interaction.message)
+        if not ctx.voice_client or not ctx.voice_client.is_playing():
+            await interaction.response.send_message("Nothing to skip!", ephemeral=True)
+            return
+        ctx.voice_client.stop()
+        await interaction.response.send_message("⏭️ Skipped", ephemeral=True)
+
+    @discord.ui.button(label="🔊", style=discord.ButtonStyle.secondary, custom_id="volume_up")
+    async def volume_up(self, interaction: discord.Interaction, button: discord.ui.Button):
+        ctx = await interaction.client.get_context(interaction.message)
+        if not ctx.voice_client or not ctx.voice_client.source:
+            await interaction.response.send_message("Nothing is playing!", ephemeral=True)
+            return
+        current_volume = ctx.voice_client.source.volume
+        new_volume = min(2.0, current_volume + 0.2)
+        ctx.voice_client.source.volume = new_volume
+        await interaction.response.send_message(f"Volume set to {int(new_volume * 100)}%", ephemeral=True)
+
 class Music(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -172,11 +223,42 @@ class Music(commands.Cog):
             }
             self.start_times[ctx.guild.id] = datetime.now()
             
+            # Create embed message
+            embed = discord.Embed(
+                title="Now Playing 🎵",
+                description=f"**[{player.title}]({player.webpage_url})**",
+                color=discord.Color.purple()
+            )
+            
+            # Add duration if available
+            if player.duration:
+                minutes, seconds = divmod(player.duration, 60)
+                embed.add_field(
+                    name="Duration",
+                    value=f"{int(minutes)}:{int(seconds):02d}",
+                    inline=True
+                )
+            
+            # Add requester
+            embed.add_field(
+                name="Requested by",
+                value=str(ctx.author),
+                inline=True
+            )
+            
+            # Add thumbnail if available
+            if player.thumbnail:
+                embed.set_thumbnail(url=player.thumbnail)
+            
             # Set initial volume
             player.volume = 1.0
             
-            # Start playing the track first to avoid delays
+            # Start playing the track
             ctx.voice_client.play(player, after=lambda e: self.bot.loop.create_task(self.after_playing(ctx, e)))
+            
+            # Create and send the message with buttons
+            view = MusicButtons(self)
+            await ctx.send(embed=embed, view=view)
             
             # Create TrackHistory entry
             try:
@@ -200,8 +282,6 @@ class Music(commands.Cog):
                 logger.error(f"Database error while saving track history: {str(db_error)}")
                 if self.db_session:
                     self.db_session.rollback()
-            
-            # Let the display cog handle the now playing message
             
         except Exception as e:
             logger.error(f"Error playing track: {str(e)}")
