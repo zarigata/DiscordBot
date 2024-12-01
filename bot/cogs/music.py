@@ -318,34 +318,92 @@ class Music(commands.Cog):
                 return False
         return True
 
+    async def get_youtube_info(self, url, loop=None):
+        """Get YouTube video info with better error handling."""
+        ydl_opts = {
+            'format': 'bestaudio/best',
+            'noplaylist': True,
+            'quiet': True,
+            'no_warnings': True,
+            'extract_flat': False,
+            'force_generic_extractor': False,
+            'cachedir': False,
+            'default_search': 'ytsearch',
+            'source_address': '0.0.0.0',
+            'postprocessors': [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'mp3',
+                'preferredquality': '192',
+            }],
+        }
+
+        try:
+            # If the URL is not a valid YouTube URL, treat it as a search query
+            if not ('youtube.com' in url or 'youtu.be' in url):
+                url = f'ytsearch:{url}'
+
+            loop = loop or asyncio.get_event_loop()
+            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                data = await loop.run_in_executor(None, lambda: ydl.extract_info(url, download=False))
+                
+                # Handle search results
+                if 'entries' in data:
+                    data = data['entries'][0]
+                
+                if not data:
+                    raise ValueError("Could not find any matching videos")
+                    
+                return data
+                
+        except Exception as e:
+            logger.error(f"Error extracting info: {str(e)}")
+            if 'entries' in locals() and 'data' in locals():
+                logger.error(f"Extracted data: {data}")
+            raise ValueError(f"Could not process the song: {str(e)}")
+
     @commands.command(name='play')
     async def play(self, ctx, *, query):
-        """Plays a song from YouTube."""
+        """Play a song from YouTube."""
         try:
-            await self.ensure_voice(ctx)
-            
+            # Join voice channel if not already in one
+            if not ctx.voice_client:
+                if not ctx.author.voice:
+                    return await ctx.send("You need to be in a voice channel to play music!")
+                await ctx.author.voice.channel.connect()
+
             async with ctx.typing():
                 try:
-                    source = await YTDLSource.from_url(query, loop=self.bot.loop)
-                    if not source:
-                        await ctx.send("❌ Could not find any matching songs.")
-                        return
-                        
-                    if not ctx.voice_client.is_playing():
-                        await self.play_track(ctx, source)
-                    else:
-                        # Add to queue
-                        self.music_queues[ctx.guild.id].append(source)
-                        await ctx.send(f'Added to queue: {source.title}')
-                        
-                except Exception as e:
-                    logger.error(f"Error processing YouTube URL: {str(e)}")
-                    await ctx.send(f"❌ Error: Could not process the song. {str(e)}")
-                    return
+                    # Get video info
+                    video_data = await self.get_youtube_info(query)
                     
+                    if not video_data:
+                        return await ctx.send("Could not find any matching videos.")
+
+                    # Create FFmpeg audio source
+                    player = await YTDLSource.from_url(video_data['url'], loop=self.bot.loop, stream=True)
+                    player.title = video_data.get('title', 'Unknown')
+                    player.webpage_url = video_data.get('webpage_url', '')
+                    player.duration = video_data.get('duration', 0)
+                    player.thumbnail = video_data.get('thumbnail', '')
+                    player.uploader = video_data.get('uploader', 'Unknown')
+
+                    # If already playing, add to queue
+                    if ctx.voice_client.is_playing():
+                        self.music_queues.setdefault(ctx.guild.id, []).append(player)
+                        return await ctx.send(f"Added to queue: **{player.title}**")
+
+                    # Play the track
+                    await self.play_track(ctx, player)
+
+                except ValueError as e:
+                    await ctx.send(str(e))
+                except Exception as e:
+                    logger.error(f"Error playing track: {str(e)}")
+                    await ctx.send(f"An error occurred: {str(e)}")
+
         except Exception as e:
             logger.error(f"Error in play command: {str(e)}")
-            await ctx.send(f"❌ An error occurred: {str(e)}")
+            await ctx.send(f"An error occurred: {str(e)}")
 
     @commands.command(name='pause')
     async def pause(self, ctx):
