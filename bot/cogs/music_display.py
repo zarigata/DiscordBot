@@ -93,35 +93,35 @@ class MusicDisplay(commands.Cog):
         # Volume Down Button
         buttons.add_item(discord.ui.Button(
             style=discord.ButtonStyle.secondary,
-            emoji="",
+            emoji="🔉",
             custom_id="volume_down"
         ))
         
         # Previous Track Button
         buttons.add_item(discord.ui.Button(
             style=discord.ButtonStyle.primary,
-            emoji="",
+            emoji="⏮️",
             custom_id="prev_track"
         ))
         
         # Play/Pause Button
         buttons.add_item(discord.ui.Button(
             style=discord.ButtonStyle.success,
-            emoji="",
+            emoji="⏯️",
             custom_id="play_pause"
         ))
         
         # Next Track Button
         buttons.add_item(discord.ui.Button(
             style=discord.ButtonStyle.primary,
-            emoji="",
+            emoji="⏭️",
             custom_id="next_track"
         ))
         
         # Volume Up Button
         buttons.add_item(discord.ui.Button(
             style=discord.ButtonStyle.secondary,
-            emoji="",
+            emoji="🔊",
             custom_id="volume_up"
         ))
         
