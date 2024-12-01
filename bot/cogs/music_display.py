@@ -117,8 +117,11 @@ class MusicDisplay(commands.Cog):
         custom_id = interaction.data['custom_id']
         ctx = await self.bot.get_context(interaction.message)
         
-        # Defer the interaction response
-        await interaction.response.defer()
+        try:
+            if not interaction.response.is_done():
+                await interaction.response.defer()
+        except:
+            pass  # Interaction was already acknowledged
 
         try:
             if custom_id == "restart":

@@ -6,6 +6,7 @@ import logging
 from discord.ui import Button, View
 import re
 from datetime import datetime
+from ..utils.queue_manager import QueueManager
 
 logger = logging.getLogger(__name__)
 
@@ -102,31 +103,17 @@ class Music(commands.Cog):
         self.voice_states = {}
         self.last_search_user = None
         self.filters = {
-            'bass_boost': {
-                'bass': '+5dB'
-            },
-            'long_drive': {
-                'bass': '-5dB',
-                'treble': '-5dB'
-            },
-            'vaporwave': {
-                'tempo': '0.80',
-                'pitch': '0.84'
-            },
-            'highcore': {
-                'tempo': '1.10',
-                'pitch': '1.15'
-            },
-            'drugs': {
-                'combined': 'tremolo=f=5:d=0.9,flanger=delay=0:depth=2:speed=0.5:width=71:regen=10,chorus=0.5:0.9:50|60:0.4|0.32:0.25|0.4:2'
-            }
+            'bass_boost': {'bass': '+5dB'},
+            'long_drive': {'bass': '-5dB', 'treble': '-5dB'},
+            'vaporwave': {'tempo': '0.80', 'pitch': '0.84'},
+            'highcore': {'tempo': '1.10', 'pitch': '1.15'},
+            'drugs': {'combined': 'tremolo=f=5:d=0.9,flanger=delay=0:depth=2:speed=0.5:width=71:regen=10,chorus=0.5:0.9:50|60:0.4|0.32:0.25|0.4:2'}
         }
         self.current_tracks = {}
         self.db_session = None
         self.players = {}
-        self.music_queues = {}  # Guild-specific music queues
-        self.play_history = {}  # Guild-specific play history
-        self.start_times = {}  # Track start times
+        self.queue_manager = QueueManager()
+        self.start_times = {}
 
     async def search_youtube(self, query):
         """Search YouTube and return top 5 results"""
@@ -150,54 +137,48 @@ class Music(commands.Cog):
         ctx = await self.bot.get_context(interaction.message)
         
         try:
-            # Get player for the selected video
-            url = video_data.get('webpage_url', video_data.get('url'))
-            player = await YTDLSource.from_url(url, loop=self.bot.loop)
+            # Add to queue instead of playing immediately
+            self.queue_manager.add_to_queue(str(ctx.guild.id), video_data)
             
-            if ctx.voice_client.is_playing():
-                ctx.voice_client.stop()
-            
-            # Play the song
-            ctx.voice_client.play(player, after=lambda e: self.bot.loop.call_soon_threadsafe(
-                lambda: asyncio.run_coroutine_threadsafe(self.after_playing(ctx, e), self.bot.loop)
-            ))
-            
-            # Create embed
-            embed = discord.Embed(title="Now Playing 🎵", color=discord.Color.blue())
-            embed.add_field(name="Track", value=player.title, inline=False)
-            if player.duration:
-                minutes = int(player.duration / 60)
-                seconds = player.duration % 60
-                embed.add_field(name="Duration", value=f"{minutes:02d}:{seconds:02d}")
-            embed.add_field(name="Requested by", value=interaction.user.name)
-            
-            if player.thumbnail:
-                embed.set_thumbnail(url=player.thumbnail)
-            
-            # Store current track info
-            self.current_tracks[ctx.guild.id] = {
-                'title': player.title,
-                'url': player.url,
-                'duration': player.duration,
-                'thumbnail': player.thumbnail,
-                'requested_by': interaction.user.name
-            }
-            
-            # Delete search results message
-            await interaction.message.delete()
-            
-            # Send now playing message with view
-            view = MusicPlayerView(self)
-            await ctx.send(embed=embed, view=view)
-            
+            if not ctx.voice_client or not ctx.voice_client.is_playing():
+                # If nothing is playing, start playing
+                await self._play_next(ctx)
+            else:
+                await interaction.response.send_message(f"Added to queue: {video_data['title']}")
+                
         except Exception as e:
-            await ctx.send(f'An error occurred: {str(e)}')
+            logger.error(f"Error in play_from_search_result: {e}")
+            await interaction.response.send_message(f"An error occurred: {str(e)}")
+
+    async def _play_next(self, ctx):
+        """Play the next track in queue"""
+        try:
+            next_track = self.queue_manager.get_next_track(str(ctx.guild.id))
+            if next_track:
+                player = await YTDLSource.from_url(next_track['webpage_url'], loop=self.bot.loop)
+                await self.play_track(ctx, player)
+        except Exception as e:
+            logger.error(f"Error in _play_next: {e}")
+            await ctx.send(f"An error occurred while playing next track: {str(e)}")
+
+    async def after_playing(self, ctx, error):
+        """Callback for when a song finishes playing"""
+        if error:
+            logger.error(f"Error in playback: {error}")
+            await ctx.send(f"An error occurred during playback: {str(error)}")
+        
+        try:
+            # Play next track in queue
+            await self._play_next(ctx)
+        except Exception as e:
+            logger.error(f"Error in after_playing: {e}")
 
     @commands.command(name='play', aliases=['p'])
     async def play(self, ctx: commands.Context, *, query: str):
         """Search and play a song"""
         try:
-            await self.ensure_voice(ctx)
+            if not await self.ensure_voice(ctx):
+                return
             self.last_search_user = ctx.author
             
             # If it's a direct URL, play it immediately
@@ -211,7 +192,7 @@ class Music(commands.Cog):
                         lambda: asyncio.run_coroutine_threadsafe(self.after_playing(ctx, e), self.bot.loop)
                     ))
                     
-                    embed = discord.Embed(title="Now Playing 🎵", color=discord.Color.blue())
+                    embed = discord.Embed(title="Now Playing ", color=discord.Color.blue())
                     embed.add_field(name="Track", value=player.title, inline=False)
                     if player.duration:
                         minutes = int(player.duration / 60)
@@ -235,7 +216,7 @@ class Music(commands.Cog):
                 
                 # Create embed with search results
                 embed = discord.Embed(
-                    title="Search Results 🔍",
+                    title="Search Results ",
                     description="Select a track to play:",
                     color=discord.Color.blue()
                 )
@@ -274,19 +255,6 @@ class Music(commands.Cog):
         if self.db_session:
             self.db_session.close()
 
-    def get_guild_data(self, guild_id):
-        """Get or create guild-specific music data."""
-        if guild_id not in self.music_queues:
-            self.music_queues[guild_id] = []
-        if guild_id not in self.play_history:
-            self.play_history[guild_id] = []
-        return {
-            'queue': self.music_queues[guild_id],
-            'history': self.play_history[guild_id],
-            'current': self.current_tracks.get(guild_id),
-            'start_time': self.start_times.get(guild_id)
-        }
-
     async def cleanup(self, guild):
         """Disconnect and cleanup the player."""
         try:
@@ -296,14 +264,26 @@ class Music(commands.Cog):
 
         try:
             del self.players[guild.id]
-            del self.music_queues[guild.id]
             del self.current_tracks[guild.id]
             del self.start_times[guild.id]
         except:
             pass
 
-    async def play_track(self, ctx, player):
+    async def play_track(self, ctx, player, *, filter_name=None):
+        """Play a track and handle queue management"""
         try:
+            if ctx.voice_client.is_playing():
+                ctx.voice_client.stop()
+
+            # If filter is specified, apply it
+            if filter_name and filter_name in self.filters:
+                player = await YTDLSource.from_url(
+                    player.webpage_url,
+                    loop=self.bot.loop,
+                    stream=True,
+                    filter_options=self.filters[filter_name]
+                )
+
             # Update current track information
             self.current_tracks[ctx.guild.id] = {
                 'title': player.title,
@@ -311,18 +291,23 @@ class Music(commands.Cog):
                 'duration': player.duration,
                 'thumbnail': player.thumbnail,
                 'requested_by': str(ctx.author),
-                'guild_id': str(ctx.guild.id)
+                'guild_id': str(ctx.guild.id),
+                'filter': filter_name
             }
-            self.start_times[ctx.guild.id] = datetime.now()
+            
+            # Start playing the track
+            ctx.voice_client.play(
+                player,
+                after=lambda e: self.bot.loop.create_task(self.after_playing(ctx, e))
+            )
             
             # Create embed message
             embed = discord.Embed(
-                title="Now Playing 🎵",
+                title="Now Playing",
                 description=f"**[{player.title}]({player.webpage_url})**",
                 color=discord.Color.purple()
             )
             
-            # Add duration if available
             if player.duration:
                 minutes, seconds = divmod(player.duration, 60)
                 embed.add_field(
@@ -330,81 +315,50 @@ class Music(commands.Cog):
                     value=f"{int(minutes)}:{int(seconds):02d}",
                     inline=True
                 )
+
+            if filter_name:
+                embed.add_field(
+                    name="Filter",
+                    value=filter_name,
+                    inline=True
+                )
             
-            # Add requester
-            embed.add_field(
-                name="Requested by",
-                value=str(ctx.author),
-                inline=True
-            )
-            
-            # Add thumbnail if available
             if player.thumbnail:
                 embed.set_thumbnail(url=player.thumbnail)
             
-            # Set initial volume
-            player.volume = 1.0
-            
-            # Start playing the track
-            ctx.voice_client.play(player, after=lambda e: self.bot.loop.create_task(self.after_playing(ctx, e)))
-            
-            # Create and send the message with buttons
+            # Send the message with player view
             view = MusicPlayerView(self)
             await ctx.send(embed=embed, view=view)
-            
-            # Create TrackHistory entry
-            try:
-                track_history = TrackHistory(
-                    track_title=player.title,
-                    track_url=player.webpage_url,
-                    user_id=str(ctx.author.id),
-                    guild_id=str(ctx.guild.id),
-                    started_at=datetime.now(),
-                    track_metadata={
-                        'duration': player.duration,
-                        'thumbnail': player.thumbnail,
-                        'uploader': player.uploader
-                    }
-                )
-                
-                # Use the session from the cog instance
-                self.db_session.add(track_history)
-                self.db_session.commit()
-            except Exception as db_error:
-                logger.error(f"Database error while saving track history: {str(db_error)}")
-                if self.db_session:
-                    self.db_session.rollback()
             
         except Exception as e:
             logger.error(f"Error playing track: {str(e)}")
             await ctx.send(f'An error occurred while playing the track: {str(e)}')
-            if self.db_session:
-                self.db_session.rollback()
 
-    async def after_playing(self, ctx, error):
-        """Callback for when a song finishes playing"""
-        if error:
-            await ctx.send(f'An error occurred: {str(error)}')
+    @commands.command(name='queue')
+    async def queue(self, ctx):
+        """Show the current queue."""
+        queue_list = self.queue_manager.get_queue(str(ctx.guild.id))
         
-        # Play next song if available
-        if ctx.voice_client and ctx.voice_client.is_playing():
-            ctx.voice_client.stop()
+        if not queue_list:
+            return await ctx.send("The queue is empty.")
             
-        try:
-            # Get next song from queue
-            async with ctx.typing():
-                guild_data = self.get_guild_data(ctx.guild.id)
-                if guild_data['queue']:
-                    next_track = guild_data['queue'].pop(0)
-                    ctx.voice_client.play(next_track, after=lambda e: self.bot.loop.call_soon_threadsafe(
-                        lambda: asyncio.run_coroutine_threadsafe(self.after_playing(ctx, e), self.bot.loop)
-                    ))
-                    await ctx.send(f'Now playing: {next_track.title}')
-                else:
-                    # No more songs in queue
-                    pass
-        except Exception as e:
-            await ctx.send(f'An error occurred: {str(e)}')
+        embed = discord.Embed(title="Current Queue", color=discord.Color.blue())
+        
+        for i, track in enumerate(queue_list, 1):
+            duration = self.format_duration(track.get('duration', 0))
+            embed.add_field(
+                name=f"{i}. {track['title']}",
+                value=f"Duration: {duration}",
+                inline=False
+            )
+            
+        await ctx.send(embed=embed)
+
+    @commands.command(name='clear')
+    async def clear(self, ctx):
+        """Clear the queue."""
+        self.queue_manager.clear_queue(str(ctx.guild.id))
+        await ctx.send("Queue cleared.")
 
     async def ensure_voice(self, ctx):
         """Ensure bot and user are in a voice channel."""
@@ -524,64 +478,6 @@ class Music(commands.Cog):
         view = MusicPlayerView(self)
         await ctx.send(embed=embed, view=view)
 
-    @commands.command(name='queue', aliases=['q'])
-    async def queue(self, ctx):
-        """Show the current queue."""
-        guild_data = self.get_guild_data(ctx.guild.id)
-        
-        if not guild_data['current'] and not guild_data['queue']:
-            return await ctx.send("No tracks in queue.")
-
-        embed = discord.Embed(title="Music Queue", color=discord.Color.blue())
-        
-        # Current track
-        if guild_data['current']:
-            current = guild_data['current']
-            duration = str(datetime.fromtimestamp(current['duration']).strftime('%M:%S')) if current.get('duration') else 'Unknown'
-            elapsed = (datetime.now() - guild_data['start_time']).total_seconds() if guild_data['start_time'] else 0
-            elapsed_str = str(datetime.fromtimestamp(elapsed).strftime('%M:%S'))
-            
-            embed.add_field(
-                name="Now Playing",
-                value=f"[{current['title']}]({current['url']})\n`{elapsed_str}/{duration}` | Requested by: {current['requested_by']}",
-                inline=False
-            )
-
-        # Queue
-        if guild_data['queue']:
-            queue_list = []
-            for i, track in enumerate(guild_data['queue'], 1):
-                source = await YTDLSource.from_url(track['url'], loop=self.bot.loop)
-                duration = str(datetime.fromtimestamp(source.duration).strftime('%M:%S')) if source.duration else 'Unknown'
-                queue_list.append(f"`{i}.` [{source.title}]({track['url']}) | `{duration}` | Requested by: {track['requested_by']}")
-            
-            embed.add_field(
-                name="Up Next",
-                value="\n".join(queue_list[:10]) + (f"\n... and {len(guild_data['queue']) - 10} more" if len(guild_data['queue']) > 10 else ""),
-                inline=False
-            )
-
-        await ctx.send(embed=embed)
-
-    @commands.command(name='history')
-    async def history(self, ctx):
-        """Show recently played tracks."""
-        guild_data = self.get_guild_data(ctx.guild.id)
-        
-        if not guild_data['history']:
-            return await ctx.send("No track history available.")
-
-        embed = discord.Embed(title="Recently Played Tracks", color=discord.Color.purple())
-        
-        history_list = []
-        for i, entry in enumerate(guild_data['history'][:10], 1):
-            track = entry['track']
-            played_at = entry['played_at'].strftime('%H:%M:%S')
-            history_list.append(f"`{i}.` [{track['title']}]({track['url']}) | Played at: {played_at}")
-        
-        embed.description = "\n".join(history_list)
-        await ctx.send(embed=embed)
-
     @commands.command(name='disconnect', aliases=['leave'])
     async def disconnect(self, ctx):
         """Disconnect the bot from the voice channel."""
@@ -598,7 +494,7 @@ class Music(commands.Cog):
             return await ctx.send("Nothing is playing right now.")
             
         ctx.voice_client.stop()
-        await ctx.send("⏭️ Skipped the current track.")
+        await ctx.send(" Skipped the current track.")
 
     @commands.command(name='restart')
     async def _restart(self, ctx: commands.Context):
@@ -620,161 +516,211 @@ class Music(commands.Cog):
             ctx.voice_client.play(source, after=lambda e: self.bot.loop.call_soon_threadsafe(
                 lambda: asyncio.run_coroutine_threadsafe(self.after_playing(ctx, e), self.bot.loop)
             ))
-            await ctx.send('⏮️ Restarted the current song.')
+            await ctx.send(' Restarted the current song.')
         except Exception as e:
             await ctx.send(f'An error occurred: {str(e)}')
 
     @commands.command(name='filter')
     async def _filter(self, ctx: commands.Context, filter_name: str = None):
         """Apply an audio filter to the current song"""
-        if not ctx.voice_client or not ctx.voice_client.source:
-            return await ctx.send('Nothing is playing right now.')
-            
-        if not filter_name:
-            return await ctx.send('Available filters: bass_boost, long_drive, vaporwave, highcore, drugs')
-            
-        if filter_name.lower() not in self.filters:
-            return await ctx.send('Invalid filter. Available filters: bass_boost, long_drive, vaporwave, highcore, drugs')
-            
-        # Store current track info
-        current_source = ctx.voice_client.source
-        if not hasattr(current_source, 'data'):
-            return await ctx.send('Cannot apply filter to this type of track.')
-            
-        # Stop current playback
-        ctx.voice_client.stop()
-        
         try:
-            # Create new source with filter
-            source = await YTDLSource.from_url(
-                current_source.data['webpage_url'],
-                loop=self.bot.loop,
-                filter_options=self.filters[filter_name.lower()]
-            )
-            ctx.voice_client.play(source, after=lambda e: self.bot.loop.call_soon_threadsafe(
-                lambda: asyncio.run_coroutine_threadsafe(self.after_playing(ctx, e), self.bot.loop)
-            ))
-            await ctx.send(f'🎛️ Applied filter: {filter_name}')
+            if not ctx.voice_client or not ctx.voice_client.is_playing():
+                return await ctx.send("Nothing is playing right now.")
+
+            if not filter_name:
+                available_filters = ", ".join(self.filters.keys())
+                return await ctx.send(f"Available filters: {available_filters}")
+
+            if filter_name not in self.filters:
+                return await ctx.send(f"Filter '{filter_name}' not found.")
+
+            # Get current track info before stopping
+            current_track = self.current_tracks.get(ctx.guild.id)
+            if not current_track:
+                return await ctx.send("Cannot apply filter: no track information found.")
+
+            # Stop current playback
+            ctx.voice_client.stop()
+
+            try:
+                # Recreate the source with the new filter
+                source = await YTDLSource.from_url(
+                    current_track['url'],
+                    loop=self.bot.loop,
+                    stream=True,
+                    filter_options=self.filters[filter_name]
+                )
+
+                # Update current track info with filter
+                current_track['filter'] = filter_name
+                self.current_tracks[ctx.guild.id] = current_track
+
+                # Play with new filter
+                ctx.voice_client.play(
+                    source,
+                    after=lambda e: self.bot.loop.create_task(self.after_playing(ctx, e))
+                )
+
+                await ctx.send(f'Applied filter: {filter_name}')
+
+            except Exception as e:
+                logger.error(f"Error applying filter: {str(e)}")
+                # If filter fails, try to restore original playback
+                try:
+                    source = await YTDLSource.from_url(current_track['url'], loop=self.bot.loop)
+                    ctx.voice_client.play(
+                        source,
+                        after=lambda e: self.bot.loop.create_task(self.after_playing(ctx, e))
+                    )
+                    await ctx.send(f"Error applying filter. Restored original playback.")
+                except:
+                    await ctx.send("Failed to restore playback. Please try playing the track again.")
+
         except Exception as e:
             await ctx.send(f'An error occurred: {str(e)}')
 
-async def setup(bot):
-    await bot.add_cog(Music(bot))
-
-class YTDLSource(discord.PCMVolumeTransformer):
-    def __init__(self, source, *, data, volume=0.5):
-        super().__init__(source, volume)
-        self.data = data
-        self.title = data.get('title')
-        self.url = data.get('webpage_url')
-        self.duration = data.get('duration')
-        self.thumbnail = data.get('thumbnail')
-        
-    @classmethod
-    async def from_url(cls, url, *, loop=None, stream=True, filter_options=None):
-        loop = loop or asyncio.get_event_loop()
-        
-        # Base FFMPEG options
-        ffmpeg_options = {
-            'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
-            'options': '-vn'
+    async def get_youtube_info(self, url, loop=None):
+        """Get YouTube video info with better error handling."""
+        ydl_opts = {
+            'format': 'bestaudio/best',
+            'noplaylist': True,
+            'quiet': True,
+            'no_warnings': True,
+            'extract_flat': False,
+            'force_generic_extractor': False,
+            'cachedir': False,
+            'default_search': 'ytsearch',
+            'source_address': '0.0.0.0',
+            'postprocessors': [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'mp3',
+                'preferredquality': '192',
+            }],
         }
-        
-        # Add filter options if provided
-        if filter_options:
-            filter_string = []
-            for effect, value in filter_options.items():
-                if effect == 'bass':
-                    filter_string.append(f"bass=g={value}")
-                elif effect == 'treble':
-                    filter_string.append(f"treble=g={value}")
-                elif effect == 'tempo':
-                    filter_string.append(f"atempo={value}")
-                elif effect == 'pitch':
-                    filter_string.append(f"asetrate=44100*{value},aresample=44100")
-                elif effect == 'combined':
-                    filter_string.append(value)
-                    
-            if filter_string:
-                ffmpeg_options['options'] = f'-vn -af "{",".join(filter_string)}"'
-                logger.info(f"Using FFmpeg filter: {ffmpeg_options['options']}")
-        
+
         try:
-            # Extract video info
-            data = await loop.run_in_executor(None, lambda: ytdl_download.extract_info(url, download=not stream))
-            
-            if 'entries' in data:
-                data = data['entries'][0]
+            # If the URL is not a valid YouTube URL, treat it as a search query
+            if not ('youtube.com' in url or 'youtu.be' in url):
+                url = f'ytsearch:{url}'
+
+            loop = loop or asyncio.get_event_loop()
+            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                data = await loop.run_in_executor(None, lambda: ydl.extract_info(url, download=False))
                 
-            filename = data['url'] if stream else ytdl_download.prepare_filename(data)
-            source = discord.FFmpegPCMAudio(filename, **ffmpeg_options)
-            return cls(source, data=data)
-            
+                # Handle search results
+                if 'entries' in data:
+                    data = data['entries'][0]
+                
+                if not data:
+                    raise ValueError("Could not find any matching videos")
+                    
+                return data
+                
         except Exception as e:
-            logger.error(f"Error in YTDLSource.from_url: {str(e)}")
-            logger.error(f"FFmpeg options: {ffmpeg_options}")
-            raise
+            logger.error(f"Error extracting info: {str(e)}")
+            if 'data' in locals() and 'entries' in locals():
+                logger.error(f"Extracted data: {data}")
+            raise ValueError(f"Could not process the song: {str(e)}")
 
 class MusicPlayerView(View):
     def __init__(self, cog):
-        super().__init__(timeout=60.0)  # 60 second timeout
+        super().__init__(timeout=None)  # No timeout for music controls
         self.cog = cog
         
         # Add buttons
         play_pause_button = Button(
             style=discord.ButtonStyle.success,
             label="Play/Pause",
-            custom_id="play_pause",
-            row=0
+            custom_id="playpause"
         )
         play_pause_button.callback = self.play_pause_callback
         self.add_item(play_pause_button)
-        
-        stop_button = Button(
-            style=discord.ButtonStyle.danger,
-            label="Stop",
-            custom_id="stop",
-            row=0
-        )
-        stop_button.callback = self.stop_callback
-        self.add_item(stop_button)
-        
+
         skip_button = Button(
             style=discord.ButtonStyle.primary,
             label="Skip",
-            custom_id="skip",
-            row=1
+            custom_id="skip"
         )
         skip_button.callback = self.skip_callback
         self.add_item(skip_button)
-        
+
         restart_button = Button(
             style=discord.ButtonStyle.primary,
             label="Restart",
-            custom_id="restart",
-            row=1
+            custom_id="restart"
         )
         restart_button.callback = self.restart_callback
         self.add_item(restart_button)
-        
-        queue_button = Button(
-            style=discord.ButtonStyle.primary,
-            label="Queue",
-            custom_id="queue",
-            row=2
+
+        filter_button = Button(
+            style=discord.ButtonStyle.secondary,
+            label="Vaporwave",
+            custom_id="vaporwave"
         )
-        queue_button.callback = self.queue_callback
-        self.add_item(queue_button)
-        
-        history_button = Button(
-            style=discord.ButtonStyle.primary,
-            label="History",
-            custom_id="history",
-            row=2
-        )
-        history_button.callback = self.history_callback
-        self.add_item(history_button)
-        
+        filter_button.callback = self.filter_callback
+        self.add_item(filter_button)
+
+    async def filter_callback(self, interaction):
+        try:
+            ctx = await self.cog.bot.get_context(interaction.message)
+            
+            if not ctx.voice_client or not ctx.voice_client.is_playing():
+                await interaction.response.send_message("Nothing is playing right now.")
+                return
+
+            # Get current track info
+            current_track = self.cog.current_tracks.get(ctx.guild.id)
+            if not current_track:
+                await interaction.response.send_message("No track information found.")
+                return
+
+            # Defer the response since this might take a while
+            await interaction.response.defer()
+
+            # Stop current playback
+            ctx.voice_client.stop()
+
+            try:
+                # Apply vaporwave filter
+                source = await YTDLSource.from_url(
+                    current_track['url'],
+                    loop=self.cog.bot.loop,
+                    stream=True,
+                    filter_options=self.cog.filters['vaporwave']
+                )
+
+                # Update current track info
+                current_track['filter'] = 'vaporwave'
+                self.cog.current_tracks[ctx.guild.id] = current_track
+
+                # Play with filter
+                ctx.voice_client.play(
+                    source,
+                    after=lambda e: self.cog.bot.loop.create_task(self.cog.after_playing(ctx, e))
+                )
+
+                await interaction.followup.send("Applied vaporwave filter!")
+
+            except Exception as e:
+                logger.error(f"Error applying vaporwave filter: {str(e)}")
+                # Try to restore original playback
+                try:
+                    source = await YTDLSource.from_url(current_track['url'], loop=self.cog.bot.loop)
+                    ctx.voice_client.play(
+                        source,
+                        after=lambda e: self.cog.bot.loop.create_task(self.cog.after_playing(ctx, e))
+                    )
+                    await interaction.followup.send("Error applying filter. Restored original playback.")
+                except:
+                    await interaction.followup.send("Failed to restore playback. Please try playing the track again.")
+
+        except Exception as e:
+            logger.error(f"Error in filter_callback: {str(e)}")
+            try:
+                await interaction.followup.send(f"An error occurred: {str(e)}")
+            except:
+                pass
+
     async def play_pause_callback(self, interaction):
         ctx = await self.cog.bot.get_context(interaction.message)
         if ctx.voice_client.is_playing():
@@ -786,21 +732,13 @@ class MusicPlayerView(View):
         else:
             await interaction.response.send_message("Nothing is playing right now.")
             
-    async def stop_callback(self, interaction):
-        ctx = await self.cog.bot.get_context(interaction.message)
-        if ctx.voice_client:
-            await self.cog.cleanup(ctx.guild)
-            await interaction.response.send_message(" Stopped the music and cleared the queue.")
-        else:
-            await interaction.response.send_message("Nothing is playing right now.")
-            
     async def skip_callback(self, interaction):
         ctx = await self.cog.bot.get_context(interaction.message)
         if not ctx.voice_client or not ctx.voice_client.is_playing():
             return await interaction.response.send_message("Nothing is playing right now.")
             
         ctx.voice_client.stop()
-        await interaction.response.send_message("⏭️ Skipped the current track.")
+        await interaction.response.send_message(" Skipped the current track.")
         
     async def restart_callback(self, interaction):
         ctx = await self.cog.bot.get_context(interaction.message)
@@ -821,62 +759,81 @@ class MusicPlayerView(View):
             ctx.voice_client.play(source, after=lambda e: self.cog.bot.loop.call_soon_threadsafe(
                 lambda: asyncio.run_coroutine_threadsafe(self.cog.after_playing(ctx, e), self.cog.bot.loop)
             ))
-            await interaction.response.send_message('⏮️ Restarted the current song.')
+            await interaction.response.send_message(' Restarted the current song.')
         except Exception as e:
             await interaction.response.send_message(f'An error occurred: {str(e)}')
             
-    async def queue_callback(self, interaction):
-        ctx = await self.cog.bot.get_context(interaction.message)
-        guild_data = self.cog.get_guild_data(ctx.guild.id)
-        
-        if not guild_data['current'] and not guild_data['queue']:
-            return await interaction.response.send_message("No tracks in queue.")
+class YTDLSource(discord.PCMVolumeTransformer):
+    def __init__(self, source, *, data, volume=0.5):
+        super().__init__(source, volume)
+        self.data = data
+        self.title = data.get('title')
+        self.webpage_url = data.get('webpage_url')  # Changed from url to webpage_url
+        self.url = data.get('webpage_url')  # Keep url for backwards compatibility
+        self.duration = data.get('duration')
+        self.thumbnail = data.get('thumbnail')
+        self.uploader = data.get('uploader')
 
-        embed = discord.Embed(title="Music Queue", color=discord.Color.blue())
+    @classmethod
+    async def from_url(cls, url, *, loop=None, stream=True, filter_options=None):
+        loop = loop or asyncio.get_event_loop()
         
-        # Current track
-        if guild_data['current']:
-            current = guild_data['current']
-            duration = str(datetime.fromtimestamp(current['duration']).strftime('%M:%S')) if current.get('duration') else 'Unknown'
-            elapsed = (datetime.now() - guild_data['start_time']).total_seconds() if guild_data['start_time'] else 0
-            elapsed_str = str(datetime.fromtimestamp(elapsed).strftime('%M:%S'))
+        # Enhanced FFMPEG options
+        ffmpeg_options = {
+            'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5 -analyzeduration 0 -loglevel 0',
+            'options': '-vn -b:a 192k'  # Set audio bitrate to 192k
+        }
+        
+        # Add filter options if provided
+        if filter_options:
+            filter_string = []
+            for effect, value in filter_options.items():
+                if effect == 'bass':
+                    filter_string.append(f"bass=g={value}")
+                elif effect == 'treble':
+                    filter_string.append(f"treble=g={value}")
+                elif effect == 'tempo':
+                    filter_string.append(f"atempo={value}")
+                elif effect == 'pitch':
+                    filter_string.append(f"asetrate=44100*{value},aresample=44100")
+                elif effect == 'combined':
+                    filter_string.append(value)
+                    
+            if filter_string:
+                ffmpeg_options['options'] = f'-vn -b:a 192k -af "{",".join(filter_string)}"'
+                logger.info(f"Using FFmpeg filter: {ffmpeg_options['options']}")
+        
+        try:
+            # Extract video info with better error handling
+            data = await loop.run_in_executor(None, lambda: ytdl_download.extract_info(url, download=not stream))
             
-            embed.add_field(
-                name="Now Playing",
-                value=f"[{current['title']}]({current['url']})\n`{elapsed_str}/{duration}` | Requested by: {current['requested_by']}",
-                inline=False
-            )
-
-        # Queue
-        if guild_data['queue']:
-            queue_list = []
-            for i, track in enumerate(guild_data['queue'], 1):
-                source = await YTDLSource.from_url(track['url'], loop=self.cog.bot.loop)
-                duration = str(datetime.fromtimestamp(source.duration).strftime('%M:%S')) if source.duration else 'Unknown'
-                queue_list.append(f"`{i}.` [{source.title}]({track['url']}) | `{duration}` | Requested by: {track['requested_by']}")
+            if 'entries' in data:
+                data = data['entries'][0]
             
-            embed.add_field(
-                name="Up Next",
-                value="\n".join(queue_list[:10]) + (f"\n... and {len(guild_data['queue']) - 10} more" if len(guild_data['queue']) > 10 else ""),
-                inline=False
-            )
+            if not stream:
+                filename = ytdl_download.prepare_filename(data)
+            else:
+                # For streaming, ensure we have a valid URL
+                if 'url' not in data:
+                    raise ValueError("Could not extract stream URL from video data")
+                filename = data['url']
+            
+            # Create the audio source with enhanced error handling
+            try:
+                source = discord.FFmpegPCMAudio(filename, **ffmpeg_options)
+                logger.info(f"Successfully created FFmpeg audio source for: {data.get('title', 'Unknown Title')}")
+                return cls(source, data=data)
+            except Exception as e:
+                logger.error(f"FFmpeg error: {str(e)}")
+                logger.error(f"Filename: {filename}")
+                logger.error(f"FFmpeg options: {ffmpeg_options}")
+                raise
+                
+        except Exception as e:
+            logger.error(f"Error in YTDLSource.from_url: {str(e)}")
+            logger.error(f"URL: {url}")
+            logger.error(f"Stream mode: {stream}")
+            raise
 
-        await interaction.response.send_message(embed=embed)
-        
-    async def history_callback(self, interaction):
-        ctx = await self.cog.bot.get_context(interaction.message)
-        guild_data = self.cog.get_guild_data(ctx.guild.id)
-        
-        if not guild_data['history']:
-            return await interaction.response.send_message("No track history available.")
-
-        embed = discord.Embed(title="Recently Played Tracks", color=discord.Color.purple())
-        
-        history_list = []
-        for i, entry in enumerate(guild_data['history'][:10], 1):
-            track = entry['track']
-            played_at = entry['played_at'].strftime('%H:%M:%S')
-            history_list.append(f"`{i}.` [{track['title']}]({track['url']}) | Played at: {played_at}")
-        
-        embed.description = "\n".join(history_list)
-        await interaction.response.send_message(embed=embed)
+async def setup(bot):
+    await bot.add_cog(Music(bot))
