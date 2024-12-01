@@ -139,3 +139,342 @@ discord.errors.InteractionResponded: This interaction has already been responded
 2024-12-01 01:55:07,405 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 01:55:07] "GET /api/stats HTTP/1.1" 200 -
 2024-12-01 01:55:12,718 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 01:55:12] "GET /api/stats HTTP/1.1" 200 -
 2024-12-01 01:55:18,313 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 01:55:18] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 01:59:19,091 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.15.10:5000
+2024-12-01 01:59:19,092 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-12-01 01:59:19,690 - discord.client - INFO - logging in using static token
+2024-12-01 01:59:20,705 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: 22600a87a7df146710c10d955e036e58).
+2024-12-01 01:59:22,759 - discord - INFO - Logged in as THE FUNNY ONE#8336
+2024-12-01 01:59:25,641 - discord.voice_client - INFO - Connecting to voice...
+2024-12-01 01:59:25,641 - discord.voice_client - INFO - Starting voice handshake... (connection attempt 1)
+2024-12-01 01:59:25,907 - discord.voice_client - INFO - Voice handshake complete. Endpoint found brazil11181.discord.media
+2024-12-01 01:59:29,713 - discord - INFO - Extracting info for: https://rr12---sn-8p8v-bg0se.googlevideo.com/videoplayback?expire=1733050772&ei=NO1LZ7i1DOmb4dUPyqGGkQY&ip=179.130.157.15&id=o-ANGyCXglAhkWFjGdFZloM6pUxlyJBCh4neHQdg80ACaB&itag=251&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&met=1733029172%2C&mh=TO&mm=31%2C29&mn=sn-8p8v-bg0se%2Csn-b8u-bg0l&ms=au%2Crdu&mv=m&mvi=12&pl=24&rms=au%2Cau&initcwndbps=1747500&bui=AQn3pFRcOSfBVFjNRQ5AZ1lGYd3pDCyiMdjgOOaj03vsFRn8BybMARHP4SdRy0q9tP5x98D2HNPueIzf&spc=qtApAdNeiM8xT4xJyMQYjUI8uWzXv8e6pQPG_mSpYASVGF8&vprv=1&svpuc=1&mime=audio%2Fwebm&rqh=1&gir=yes&clen=1394802&dur=86.541&lmt=1714528983806066&mt=1733028784&fvip=4&keepalive=yes&fexp=51326932%2C51335594&c=IOS&txp=4502434&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cbui%2Cspc%2Cvprv%2Csvpuc%2Cmime%2Crqh%2Cgir%2Cclen%2Cdur%2Clmt&sig=AJfQdSswRAIgTzWqGJnfcUrVYK_A2cKwzuFhH65RVRRxL5PjJntrLgkCIHBcus4jiCRXOm7K6xFMECyL2qfn7POZO7aLPEJuFKPT&lsparams=met%2Cmh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Crms%2Cinitcwndbps&lsig=AGluJ3MwRQIhAPojfhTCDZBwt3moc6lC3MJbnRSdxSl1F1SdWm6Zck6IAiA5EnPXMKvVIvw5YQR2WhPnyXudq2pVzN3hQBr6Q-K8qw%3D%3D
+2024-12-01 01:59:30,225 - discord - INFO - Playing audio from: https://rr12---sn-8p8v-bg0se.googlevideo.com/videoplayback?expire=1733050772&ei=NO1LZ7i1DOmb4dUPyqGGkQY&ip=179.130.157.15&id=o-ANGyCXglAhkWFjGdFZloM6pUxlyJBCh4neHQdg80ACaB&itag=251&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&met=1733029172%2C&mh=TO&mm=31%2C29&mn=sn-8p8v-bg0se%2Csn-b8u-bg0l&ms=au%2Crdu&mv=m&mvi=12&pl=24&rms=au%2Cau&initcwndbps=1747500&bui=AQn3pFRcOSfBVFjNRQ5AZ1lGYd3pDCyiMdjgOOaj03vsFRn8BybMARHP4SdRy0q9tP5x98D2HNPueIzf&spc=qtApAdNeiM8xT4xJyMQYjUI8uWzXv8e6pQPG_mSpYASVGF8&vprv=1&svpuc=1&mime=audio%2Fwebm&rqh=1&gir=yes&clen=1394802&dur=86.541&lmt=1714528983806066&mt=1733028784&fvip=4&keepalive=yes&fexp=51326932%2C51335594&c=IOS&txp=4502434&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cbui%2Cspc%2Cvprv%2Csvpuc%2Cmime%2Crqh%2Cgir%2Cclen%2Cdur%2Clmt&sig=AJfQdSswRAIgTzWqGJnfcUrVYK_A2cKwzuFhH65RVRRxL5PjJntrLgkCIHBcus4jiCRXOm7K6xFMECyL2qfn7POZO7aLPEJuFKPT&lsparams=met%2Cmh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Crms%2Cinitcwndbps&lsig=AGluJ3MwRQIhAPojfhTCDZBwt3moc6lC3MJbnRSdxSl1F1SdWm6Zck6IAiA5EnPXMKvVIvw5YQR2WhPnyXudq2pVzN3hQBr6Q-K8qw%3D%3D
+2024-12-01 01:59:30,472 - discord - ERROR - Database error while saving track history: 'user_id' is an invalid keyword argument for TrackHistory
+2024-12-01 01:59:33,652 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 01:59:33] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 01:59:39,250 - discord.client - ERROR - Ignoring exception in on_interaction
+Traceback (most recent call last):
+  File "J:\NODE\DiscordBot\bot\cogs\music_display.py", line 244, in on_interaction
+    await interaction.response.send_message(f"Volume set to {int(new_volume * 100)}%", ephemeral=True)
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\interactions.py", line 801, in send_message
+    await adapter.create_interaction_response(
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\webhook\async_.py", line 221, in request
+    raise HTTPException(response, data)
+discord.errors.HTTPException: 400 Bad Request (error code: 40060): Interaction has already been acknowledged.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "J:\NODE\DiscordBot\bot\cogs\music_display.py", line 271, in on_interaction
+    await interaction.response.send_message(f"Error: {str(e)}", ephemeral=True)
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\interactions.py", line 774, in send_message
+    raise InteractionResponded(self._parent)
+discord.errors.InteractionResponded: This interaction has already been responded to before
+2024-12-01 01:59:40,984 - discord.client - ERROR - Ignoring exception in on_interaction
+Traceback (most recent call last):
+  File "J:\NODE\DiscordBot\bot\cogs\music_display.py", line 244, in on_interaction
+    await interaction.response.send_message(f"Volume set to {int(new_volume * 100)}%", ephemeral=True)
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\interactions.py", line 801, in send_message
+    await adapter.create_interaction_response(
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\webhook\async_.py", line 221, in request
+    raise HTTPException(response, data)
+discord.errors.HTTPException: 400 Bad Request (error code: 40060): Interaction has already been acknowledged.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "J:\NODE\DiscordBot\bot\cogs\music_display.py", line 271, in on_interaction
+    await interaction.response.send_message(f"Error: {str(e)}", ephemeral=True)
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\interactions.py", line 774, in send_message
+    raise InteractionResponded(self._parent)
+discord.errors.InteractionResponded: This interaction has already been responded to before
+2024-12-01 02:00:55,692 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.15.10:5000
+2024-12-01 02:00:55,692 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-12-01 02:00:56,271 - discord.client - INFO - logging in using static token
+2024-12-01 02:00:57,397 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: 8954168d6d551280a4df91cbd07b4c99).
+2024-12-01 02:00:59,419 - discord - INFO - Logged in as THE FUNNY ONE#8336
+2024-12-01 02:01:01,651 - discord.voice_client - INFO - Connecting to voice...
+2024-12-01 02:01:01,652 - discord.voice_client - INFO - Starting voice handshake... (connection attempt 1)
+2024-12-01 02:01:01,914 - discord.voice_client - INFO - Voice handshake complete. Endpoint found brazil11181.discord.media
+2024-12-01 02:01:05,596 - discord - INFO - Extracting info for: https://rr12---sn-8p8v-bg0se.googlevideo.com/videoplayback?expire=1733050868&ei=lO1LZ4DOCvuU4dUPpsDq6AE&ip=179.130.157.15&id=o-AGngcceAUMSP4j9YFVXcqzdWw00LFleiL_SXSNCw1hNV&itag=251&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&met=1733029268%2C&mh=TO&mm=31%2C29&mn=sn-8p8v-bg0se%2Csn-b8u-bg0l&ms=au%2Crdu&mv=m&mvi=12&pl=24&rms=au%2Cau&initcwndbps=1747500&bui=AQn3pFSDV4Y69wGRQPZO-RKw6iJ-FOcFZ9l-23ad1R0lmoAFbR0H2pp99am0QNVPhsTjshhWcvXUZAAQ&spc=qtApAQygB2648_LMoUVrFP3i7e0TA0Djd6BwTT8CJjvIZ4E&vprv=1&svpuc=1&mime=audio%2Fwebm&rqh=1&gir=yes&clen=1394802&dur=86.541&lmt=1714528983806066&mt=1733028784&fvip=4&keepalive=yes&fexp=51326932%2C51335594&c=IOS&txp=4502434&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cbui%2Cspc%2Cvprv%2Csvpuc%2Cmime%2Crqh%2Cgir%2Cclen%2Cdur%2Clmt&sig=AJfQdSswRQIhALxOa22juaEHqhvKNyric3K0U5dQtDbqYZiEVuYKgnynAiB1eDDjmiVvoqrAzf96rUV5EPGGOp-14HXpGQpbrRU_rQ%3D%3D&lsparams=met%2Cmh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Crms%2Cinitcwndbps&lsig=AGluJ3MwRQIhAO-Hp0MbHcHDEJJ7DWM9aMmXROk0vJXyEC15ZYA2-P39AiBoajnK0_toDR4LZpF1H553T-gkkPRiDnN3Umn85rJ2LA%3D%3D
+2024-12-01 02:01:06,102 - discord - INFO - Playing audio from: https://rr12---sn-8p8v-bg0se.googlevideo.com/videoplayback?expire=1733050868&ei=lO1LZ4DOCvuU4dUPpsDq6AE&ip=179.130.157.15&id=o-AGngcceAUMSP4j9YFVXcqzdWw00LFleiL_SXSNCw1hNV&itag=251&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&met=1733029268%2C&mh=TO&mm=31%2C29&mn=sn-8p8v-bg0se%2Csn-b8u-bg0l&ms=au%2Crdu&mv=m&mvi=12&pl=24&rms=au%2Cau&initcwndbps=1747500&bui=AQn3pFSDV4Y69wGRQPZO-RKw6iJ-FOcFZ9l-23ad1R0lmoAFbR0H2pp99am0QNVPhsTjshhWcvXUZAAQ&spc=qtApAQygB2648_LMoUVrFP3i7e0TA0Djd6BwTT8CJjvIZ4E&vprv=1&svpuc=1&mime=audio%2Fwebm&rqh=1&gir=yes&clen=1394802&dur=86.541&lmt=1714528983806066&mt=1733028784&fvip=4&keepalive=yes&fexp=51326932%2C51335594&c=IOS&txp=4502434&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cbui%2Cspc%2Cvprv%2Csvpuc%2Cmime%2Crqh%2Cgir%2Cclen%2Cdur%2Clmt&sig=AJfQdSswRQIhALxOa22juaEHqhvKNyric3K0U5dQtDbqYZiEVuYKgnynAiB1eDDjmiVvoqrAzf96rUV5EPGGOp-14HXpGQpbrRU_rQ%3D%3D&lsparams=met%2Cmh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Crms%2Cinitcwndbps&lsig=AGluJ3MwRQIhAO-Hp0MbHcHDEJJ7DWM9aMmXROk0vJXyEC15ZYA2-P39AiBoajnK0_toDR4LZpF1H553T-gkkPRiDnN3Umn85rJ2LA%3D%3D
+2024-12-01 02:01:06,416 - discord - ERROR - Database error while saving track history: 'user_id' is an invalid keyword argument for TrackHistory
+2024-12-01 02:02:12,400 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.15.10:5000
+2024-12-01 02:02:12,400 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-12-01 02:02:12,984 - discord.client - INFO - logging in using static token
+2024-12-01 02:02:14,167 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: 2ed4b0b92538c62b748e7dc08037d095).
+2024-12-01 02:02:16,195 - discord - INFO - Logged in as THE FUNNY ONE#8336
+2024-12-01 02:02:18,098 - discord.voice_client - INFO - Connecting to voice...
+2024-12-01 02:02:18,098 - discord.voice_client - INFO - Starting voice handshake... (connection attempt 1)
+2024-12-01 02:02:18,380 - discord.voice_client - INFO - Voice handshake complete. Endpoint found brazil11181.discord.media
+2024-12-01 02:02:22,699 - discord - ERROR - Database error while saving track history: 'user_id' is an invalid keyword argument for TrackHistory
+2024-12-01 02:02:28,807 - discord.player - INFO - ffmpeg process 77844 has not terminated. Waiting to terminate...
+2024-12-01 02:02:28,839 - discord.player - INFO - ffmpeg process 77844 should have terminated with a return code of 1.
+2024-12-01 02:02:33,673 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:02:33] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:02:35,373 - asyncio - ERROR - Exception in callback Music.after_playing()
+handle: <Handle Music.after_playing()>
+Traceback (most recent call last):
+  File "C:\Users\zarigata\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+TypeError: 'coroutine' object is not callable
+2024-12-01 02:02:35,365 - discord.player - INFO - ffmpeg process 76620 has not terminated. Waiting to terminate...
+2024-12-01 02:02:35,408 - discord.player - INFO - ffmpeg process 76620 should have terminated with a return code of 1.
+2024-12-01 02:02:37,640 - asyncio - ERROR - Exception in callback Music.after_playing()
+handle: <Handle Music.after_playing()>
+Traceback (most recent call last):
+  File "C:\Users\zarigata\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+TypeError: 'coroutine' object is not callable
+2024-12-01 02:02:37,634 - discord.player - INFO - ffmpeg process 53596 has not terminated. Waiting to terminate...
+2024-12-01 02:02:37,649 - discord.player - INFO - ffmpeg process 53596 should have terminated with a return code of 1.
+2024-12-01 02:02:39,498 - asyncio - ERROR - Exception in callback Music.after_playing()
+handle: <Handle Music.after_playing()>
+Traceback (most recent call last):
+  File "C:\Users\zarigata\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+TypeError: 'coroutine' object is not callable
+2024-12-01 02:02:39,486 - discord.player - INFO - ffmpeg process 78720 has not terminated. Waiting to terminate...
+2024-12-01 02:02:39,510 - discord.player - INFO - ffmpeg process 78720 should have terminated with a return code of 1.
+2024-12-01 02:02:39,585 - asyncio - ERROR - Exception in callback Music.after_playing()
+handle: <Handle Music.after_playing()>
+Traceback (most recent call last):
+  File "C:\Users\zarigata\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+TypeError: 'coroutine' object is not callable
+2024-12-01 02:02:39,585 - discord.player - INFO - ffmpeg process 76300 successfully terminated with return code of 4294967262.
+2024-12-01 02:03:07,662 - asyncio - ERROR - Exception in callback Music.after_playing()
+handle: <Handle Music.after_playing()>
+Traceback (most recent call last):
+  File "C:\Users\zarigata\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+TypeError: 'coroutine' object is not callable
+2024-12-01 02:03:07,667 - discord.player - INFO - ffmpeg process 75292 has not terminated. Waiting to terminate...
+2024-12-01 02:03:07,672 - discord.player - INFO - ffmpeg process 75292 should have terminated with a return code of 1.
+2024-12-01 02:03:33,403 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:03:33] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:03:51,953 - discord.player - INFO - ffmpeg process 76924 has not terminated. Waiting to terminate...
+2024-12-01 02:03:51,977 - asyncio - ERROR - Exception in callback Music.after_playing()
+handle: <Handle Music.after_playing()>
+Traceback (most recent call last):
+  File "C:\Users\zarigata\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+TypeError: 'coroutine' object is not callable
+2024-12-01 02:03:51,988 - discord.player - INFO - ffmpeg process 76924 should have terminated with a return code of 1.
+2024-12-01 02:03:52,069 - asyncio - ERROR - Exception in callback Music.after_playing()
+handle: <Handle Music.after_playing()>
+Traceback (most recent call last):
+  File "C:\Users\zarigata\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+TypeError: 'coroutine' object is not callable
+2024-12-01 02:03:52,069 - discord.player - INFO - ffmpeg process 59404 successfully terminated with return code of 4294967262.
+2024-12-01 02:04:01,606 - discord.player - INFO - ffmpeg process 76864 has not terminated. Waiting to terminate...
+2024-12-01 02:04:01,637 - discord.player - INFO - ffmpeg process 76864 should have terminated with a return code of 1.
+2024-12-01 02:04:01,669 - asyncio - ERROR - Exception in callback Music.after_playing()
+handle: <Handle Music.after_playing()>
+Traceback (most recent call last):
+  File "C:\Users\zarigata\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+TypeError: 'coroutine' object is not callable
+2024-12-01 02:04:24,143 - asyncio - ERROR - Exception in callback Music.after_playing()
+handle: <Handle Music.after_playing()>
+Traceback (most recent call last):
+  File "C:\Users\zarigata\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+TypeError: 'coroutine' object is not callable
+2024-12-01 02:04:24,144 - discord.player - INFO - ffmpeg process 64016 has not terminated. Waiting to terminate...
+2024-12-01 02:04:24,148 - discord.player - INFO - ffmpeg process 64016 should have terminated with a return code of 1.
+2024-12-01 02:04:33,677 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:04:33] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:04:36,160 - discord - ERROR - Database error while saving track history: 'user_id' is an invalid keyword argument for TrackHistory
+2024-12-01 02:04:46,079 - discord.player - INFO - ffmpeg process 76796 has not terminated. Waiting to terminate...
+2024-12-01 02:04:46,083 - discord.player - INFO - ffmpeg process 76796 should have terminated with a return code of 1.
+2024-12-01 02:04:46,357 - discord - ERROR - Database error while saving track history: 'user_id' is an invalid keyword argument for TrackHistory
+2024-12-01 02:04:46,462 - discord.client - ERROR - Ignoring exception in on_interaction
+Traceback (most recent call last):
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "J:\NODE\DiscordBot\bot\cogs\music_display.py", line 121, in on_interaction
+    await interaction.response.defer()
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\interactions.py", line 661, in defer
+    await adapter.create_interaction_response(
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\webhook\async_.py", line 221, in request
+    raise HTTPException(response, data)
+discord.errors.HTTPException: 400 Bad Request (error code: 40060): Interaction has already been acknowledged.
+2024-12-01 02:04:51,561 - discord.player - INFO - ffmpeg process 78136 has not terminated. Waiting to terminate...
+2024-12-01 02:04:51,606 - discord.player - INFO - ffmpeg process 78136 should have terminated with a return code of 1.
+2024-12-01 02:04:53,412 - discord.player - INFO - ffmpeg process 78260 has not terminated. Waiting to terminate...
+2024-12-01 02:04:53,433 - asyncio - ERROR - Exception in callback Music.after_playing()
+handle: <Handle Music.after_playing()>
+Traceback (most recent call last):
+  File "C:\Users\zarigata\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+TypeError: 'coroutine' object is not callable
+2024-12-01 02:04:53,442 - discord.player - INFO - ffmpeg process 78260 should have terminated with a return code of 1.
+2024-12-01 02:05:21,492 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.15.10:5000
+2024-12-01 02:05:21,492 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-12-01 02:05:22,143 - discord.client - INFO - logging in using static token
+2024-12-01 02:05:23,048 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: 03d64b8ff5ce2fedaac3a3ac8d473e35).
+2024-12-01 02:05:25,072 - discord - INFO - Logged in as THE FUNNY ONE#8336
+2024-12-01 02:05:27,742 - discord.voice_client - INFO - Connecting to voice...
+2024-12-01 02:05:27,743 - discord.voice_client - INFO - Starting voice handshake... (connection attempt 1)
+2024-12-01 02:05:27,990 - discord.voice_client - INFO - Voice handshake complete. Endpoint found brazil11181.discord.media
+2024-12-01 02:05:32,658 - discord - ERROR - Database error while saving track history: 'user_id' is an invalid keyword argument for TrackHistory
+2024-12-01 02:05:33,693 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:05:33] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:05:35,828 - discord.player - INFO - ffmpeg process 76732 has not terminated. Waiting to terminate...
+2024-12-01 02:05:35,840 - discord.player - INFO - ffmpeg process 76732 should have terminated with a return code of 1.
+2024-12-01 02:05:48,547 - discord.player - INFO - ffmpeg process 47616 has not terminated. Waiting to terminate...
+2024-12-01 02:05:48,571 - discord.player - INFO - ffmpeg process 47616 should have terminated with a return code of 1.
+2024-12-01 02:06:02,286 - discord.player - INFO - ffmpeg process 77048 has not terminated. Waiting to terminate...
+2024-12-01 02:06:02,297 - discord.player - INFO - ffmpeg process 77048 should have terminated with a return code of 1.
+2024-12-01 02:06:02,384 - discord.player - INFO - ffmpeg process 77776 successfully terminated with return code of 4294967274.
+2024-12-01 02:06:20,140 - discord.player - INFO - ffmpeg process 63988 has not terminated. Waiting to terminate...
+2024-12-01 02:06:20,155 - discord.player - INFO - ffmpeg process 63988 should have terminated with a return code of 1.
+2024-12-01 02:06:33,375 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:06:33] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:09:22,368 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.15.10:5000
+2024-12-01 02:09:22,369 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-12-01 02:09:22,925 - discord.client - INFO - logging in using static token
+2024-12-01 02:09:23,799 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: 25056d4ee4c8b68dd834f8fa34c97c3e).
+2024-12-01 02:09:25,825 - discord - INFO - Logged in as THE FUNNY ONE#8336
+2024-12-01 02:09:30,093 - discord.voice_client - INFO - Connecting to voice...
+2024-12-01 02:09:30,093 - discord.voice_client - INFO - Starting voice handshake... (connection attempt 1)
+2024-12-01 02:09:30,696 - discord.voice_client - INFO - Voice handshake complete. Endpoint found brazil11181.discord.media
+2024-12-01 02:09:33,757 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:09:33] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:09:35,740 - discord - ERROR - Database error while saving track history: 'user_id' is an invalid keyword argument for TrackHistory
+2024-12-01 02:09:39,263 - discord - INFO - Using FFmpeg filter: -vn -af "tremolo=f=5:d=0.9,flanger=delay=0:depth=2:speed=0.5:width=71:regen=10,chorus=0.5:0.9:50|60:0.4|0.32:0.25|0.4:2"
+2024-12-01 02:09:39,292 - discord.player - INFO - ffmpeg process 48228 has not terminated. Waiting to terminate...
+2024-12-01 02:09:39,324 - discord.player - INFO - ffmpeg process 48228 should have terminated with a return code of 1.
+2024-12-01 02:09:45,330 - discord - INFO - Using FFmpeg filter: -vn -af "atempo=1.10,asetrate=44100*1.15,aresample=44100"
+2024-12-01 02:09:45,369 - discord.player - INFO - ffmpeg process 76440 has not terminated. Waiting to terminate...
+2024-12-01 02:09:45,388 - discord.player - INFO - ffmpeg process 76440 should have terminated with a return code of 1.
+2024-12-01 02:10:03,563 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:10:03] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:10:06,536 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:10:06] "GET / HTTP/1.1" 200 -
+2024-12-01 02:10:06,796 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:10:06] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:10:11,730 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:10:11] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:10:17,028 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:10:17] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:10:21,732 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:10:21] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:10:27,612 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:10:27] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:10:32,303 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:10:32] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:10:37,610 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:10:37] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:10:42,305 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:10:42] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:10:47,615 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:10:47] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:10:52,315 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:10:52] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:10:57,635 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:10:57] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:10:59,905 - discord.player - INFO - ffmpeg process 77108 successfully terminated with return code of 0.
+2024-12-01 02:11:02,309 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:11:02] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:11:07,605 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:11:07] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:11:12,313 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:11:12] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:11:17,608 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:11:17] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:11:22,313 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:11:22] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:11:33,680 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:11:33] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:13:21,442 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.15.10:5000
+2024-12-01 02:13:21,442 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-12-01 02:13:21,995 - discord.client - INFO - logging in using static token
+2024-12-01 02:13:22,918 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: 85479c2c7e813a851545b0895bd29731).
+2024-12-01 02:13:24,935 - discord - INFO - Logged in as THE FUNNY ONE#8336
+2024-12-01 02:13:33,707 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:13:33] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:13:36,566 - discord.voice_client - INFO - Connecting to voice...
+2024-12-01 02:13:36,567 - discord.voice_client - INFO - Starting voice handshake... (connection attempt 1)
+2024-12-01 02:13:36,813 - discord.voice_client - INFO - Voice handshake complete. Endpoint found brazil11181.discord.media
+2024-12-01 02:14:33,777 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:14:33] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:17:00,357 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.15.10:5000
+2024-12-01 02:17:00,357 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-12-01 02:17:01,129 - discord.client - INFO - logging in using static token
+2024-12-01 02:17:02,036 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: 05261e5e76a8392702f48a972b699039).
+2024-12-01 02:17:04,067 - discord - INFO - Logged in as THE FUNNY ONE#8336
+2024-12-01 02:17:07,146 - discord.voice_client - INFO - Connecting to voice...
+2024-12-01 02:17:07,147 - discord.voice_client - INFO - Starting voice handshake... (connection attempt 1)
+2024-12-01 02:17:07,397 - discord.voice_client - INFO - Voice handshake complete. Endpoint found brazil11181.discord.media
+2024-12-01 02:17:21,988 - discord.client - ERROR - Ignoring exception in on_interaction
+Traceback (most recent call last):
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "J:\NODE\DiscordBot\bot\cogs\music_display.py", line 121, in on_interaction
+    await interaction.response.defer()
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\interactions.py", line 661, in defer
+    await adapter.create_interaction_response(
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\webhook\async_.py", line 221, in request
+    raise HTTPException(response, data)
+discord.errors.HTTPException: 400 Bad Request (error code: 40060): Interaction has already been acknowledged.
+2024-12-01 02:17:33,720 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:17:33] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:18:33,371 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:18:33] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:18:39,274 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.15.10:5000
+2024-12-01 02:18:39,275 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-12-01 02:18:40,036 - discord.client - INFO - logging in using static token
+2024-12-01 02:18:40,956 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: f4642f8f85309f7b8e6368c4dc0cc745).
+2024-12-01 02:18:42,988 - discord - INFO - Logged in as THE FUNNY ONE#8336
+2024-12-01 02:18:47,080 - discord.voice_client - INFO - Connecting to voice...
+2024-12-01 02:18:47,080 - discord.voice_client - INFO - Starting voice handshake... (connection attempt 1)
+2024-12-01 02:18:47,333 - discord.voice_client - INFO - Voice handshake complete. Endpoint found brazil11181.discord.media
+2024-12-01 02:19:01,556 - discord.client - ERROR - Ignoring exception in on_interaction
+Traceback (most recent call last):
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "J:\NODE\DiscordBot\bot\cogs\music_display.py", line 121, in on_interaction
+    await interaction.response.defer()
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\interactions.py", line 661, in defer
+    await adapter.create_interaction_response(
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\webhook\async_.py", line 221, in request
+    raise HTTPException(response, data)
+discord.errors.HTTPException: 400 Bad Request (error code: 40060): Interaction has already been acknowledged.
+2024-12-01 02:19:17,370 - bot.cogs.music - INFO - Using FFmpeg filter: -vn -af "atempo=0.80,asetrate=44100*0.84,aresample=44100"
+2024-12-01 02:19:17,385 - discord.player - INFO - ffmpeg process 78504 has not terminated. Waiting to terminate...
+2024-12-01 02:19:17,389 - discord.player - INFO - ffmpeg process 78504 should have terminated with a return code of 1.
+2024-12-01 02:19:33,670 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:19:33] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:19:42,097 - discord.client - ERROR - Ignoring exception in on_interaction
+Traceback (most recent call last):
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "J:\NODE\DiscordBot\bot\cogs\music_display.py", line 121, in on_interaction
+    await interaction.response.defer()
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\interactions.py", line 661, in defer
+    await adapter.create_interaction_response(
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\webhook\async_.py", line 221, in request
+    raise HTTPException(response, data)
+discord.errors.HTTPException: 400 Bad Request (error code: 40060): Interaction has already been acknowledged.
+2024-12-01 02:19:45,009 - discord.client - ERROR - Ignoring exception in on_interaction
+Traceback (most recent call last):
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "J:\NODE\DiscordBot\bot\cogs\music_display.py", line 121, in on_interaction
+    await interaction.response.defer()
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\interactions.py", line 661, in defer
+    await adapter.create_interaction_response(
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\webhook\async_.py", line 221, in request
+    raise HTTPException(response, data)
+discord.errors.HTTPException: 400 Bad Request (error code: 40060): Interaction has already been acknowledged.
+2024-12-01 02:19:48,575 - discord.client - ERROR - Ignoring exception in on_interaction
+Traceback (most recent call last):
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "J:\NODE\DiscordBot\bot\cogs\music_display.py", line 121, in on_interaction
+    await interaction.response.defer()
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\interactions.py", line 661, in defer
+    await adapter.create_interaction_response(
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\webhook\async_.py", line 221, in request
+    raise HTTPException(response, data)
+discord.errors.HTTPException: 400 Bad Request (error code: 40060): Interaction has already been acknowledged.
