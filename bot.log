@@ -478,3 +478,352 @@ Traceback (most recent call last):
   File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\webhook\async_.py", line 221, in request
     raise HTTPException(response, data)
 discord.errors.HTTPException: 400 Bad Request (error code: 40060): Interaction has already been acknowledged.
+2024-12-01 02:36:56,224 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.15.10:5000
+2024-12-01 02:36:56,225 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-12-01 02:36:56,892 - discord.client - INFO - logging in using static token
+2024-12-01 02:36:57,778 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: c03f5be224e4668d2566fd1f78b8e12a).
+2024-12-01 02:36:59,812 - discord - INFO - Logged in as THE FUNNY ONE#8336
+2024-12-01 02:37:02,519 - discord.voice_client - INFO - Connecting to voice...
+2024-12-01 02:37:02,520 - discord.voice_client - INFO - Starting voice handshake... (connection attempt 1)
+2024-12-01 02:37:03,136 - discord.voice_client - INFO - Voice handshake complete. Endpoint found brazil11181.discord.media
+2024-12-01 02:37:16,509 - discord.client - ERROR - Ignoring exception in on_interaction
+Traceback (most recent call last):
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "J:\NODE\DiscordBot\bot\cogs\music_display.py", line 121, in on_interaction
+    await interaction.response.defer()
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\interactions.py", line 661, in defer
+    await adapter.create_interaction_response(
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\webhook\async_.py", line 221, in request
+    raise HTTPException(response, data)
+discord.errors.HTTPException: 400 Bad Request (error code: 40060): Interaction has already been acknowledged.
+2024-12-01 02:37:31,405 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:37:31] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:37:31,794 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:37:31] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:37:37,790 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:37:37] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:37:41,569 - discord.client - ERROR - Ignoring exception in on_interaction
+Traceback (most recent call last):
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "J:\NODE\DiscordBot\bot\cogs\music_display.py", line 121, in on_interaction
+    await interaction.response.defer()
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\interactions.py", line 661, in defer
+    await adapter.create_interaction_response(
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\webhook\async_.py", line 221, in request
+    raise HTTPException(response, data)
+discord.errors.HTTPException: 400 Bad Request (error code: 40060): Interaction has already been acknowledged.
+2024-12-01 02:37:42,392 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:37:42] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:37:42,871 - discord.player - INFO - ffmpeg process 78268 has not terminated. Waiting to terminate...
+2024-12-01 02:37:42,876 - discord.player - INFO - ffmpeg process 78268 should have terminated with a return code of 1.
+2024-12-01 02:37:42,998 - discord.player - INFO - ffmpeg process 78956 has not terminated. Waiting to terminate...
+2024-12-01 02:37:43,003 - discord.player - INFO - ffmpeg process 78956 should have terminated with a return code of 1.
+2024-12-01 02:37:47,635 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:37:47] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:37:51,321 - discord.client - ERROR - Ignoring exception in on_interaction
+Traceback (most recent call last):
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "J:\NODE\DiscordBot\bot\cogs\music_display.py", line 121, in on_interaction
+    await interaction.response.defer()
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\interactions.py", line 661, in defer
+    await adapter.create_interaction_response(
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\webhook\async_.py", line 221, in request
+    raise HTTPException(response, data)
+discord.errors.HTTPException: 400 Bad Request (error code: 40060): Interaction has already been acknowledged.
+2024-12-01 02:37:52,312 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:37:52] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:37:53,334 - discord.client - ERROR - Ignoring exception in on_interaction
+Traceback (most recent call last):
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "J:\NODE\DiscordBot\bot\cogs\music_display.py", line 121, in on_interaction
+    await interaction.response.defer()
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\interactions.py", line 661, in defer
+    await adapter.create_interaction_response(
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\webhook\async_.py", line 221, in request
+    raise HTTPException(response, data)
+discord.errors.HTTPException: 400 Bad Request (error code: 40060): Interaction has already been acknowledged.
+2024-12-01 02:37:57,682 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:37:57] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:38:02,310 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:38:02] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:38:07,630 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:38:07] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:41:15,962 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.15.10:5000
+2024-12-01 02:41:15,966 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-12-01 02:41:16,731 - discord.client - INFO - logging in using static token
+2024-12-01 02:41:17,664 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: c4874b06bde20be1aecb01fdc3e4bff7).
+2024-12-01 02:41:19,705 - discord - INFO - Logged in as THE FUNNY ONE#8336
+2024-12-01 02:41:28,747 - discord.voice_client - INFO - Connecting to voice...
+2024-12-01 02:41:28,748 - discord.voice_client - INFO - Starting voice handshake... (connection attempt 1)
+2024-12-01 02:41:29,013 - discord.voice_client - INFO - Voice handshake complete. Endpoint found brazil11181.discord.media
+2024-12-01 02:41:33,735 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:41:33] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:41:45,245 - bot.cogs.music - INFO - Successfully created FFmpeg audio source for: [4K] Dr. Livesey Phonk Walk (Full Version)
+2024-12-01 02:42:06,223 - bot.cogs.music - INFO - Successfully created FFmpeg audio source for: 9MM - Memphis Cult (Lyrics)
+2024-12-01 02:42:06,226 - discord.player - INFO - ffmpeg process 76252 has not terminated. Waiting to terminate...
+2024-12-01 02:42:06,230 - discord.player - INFO - ffmpeg process 76252 should have terminated with a return code of 1.
+2024-12-01 02:42:06,300 - discord.player - INFO - ffmpeg process 49084 has not terminated. Waiting to terminate...
+2024-12-01 02:42:06,303 - discord.player - INFO - ffmpeg process 49084 should have terminated with a return code of 1.
+2024-12-01 02:44:40,659 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.15.10:5000
+2024-12-01 02:44:40,660 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-12-01 02:44:41,418 - discord.client - INFO - logging in using static token
+2024-12-01 02:44:42,372 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: e8db77a215dc1b8f199ff8c32affbdc0).
+2024-12-01 02:44:44,425 - discord - INFO - Logged in as THE FUNNY ONE#8336
+2024-12-01 02:45:23,973 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.15.10:5000
+2024-12-01 02:45:23,973 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-12-01 02:45:24,670 - discord.client - INFO - logging in using static token
+2024-12-01 02:45:25,548 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: f2e3eda0accba60917a5f7229924092d).
+2024-12-01 02:45:27,574 - discord - INFO - Logged in as THE FUNNY ONE#8336
+2024-12-01 02:45:29,884 - discord.voice_client - INFO - Connecting to voice...
+2024-12-01 02:45:29,885 - discord.voice_client - INFO - Starting voice handshake... (connection attempt 1)
+2024-12-01 02:45:30,132 - discord.voice_client - INFO - Voice handshake complete. Endpoint found brazil11181.discord.media
+2024-12-01 02:45:33,690 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:45:33] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:45:45,087 - bot.cogs.music - INFO - Successfully created FFmpeg audio source for: [4K] Dr. Livesey Phonk Walk (Full Version)
+2024-12-01 02:45:45,087 - bot.cogs.music - ERROR - Error playing track: 'YTDLSource' object has no attribute 'webpage_url'
+2024-12-01 02:45:45,300 - discord.player - INFO - ffmpeg process 77484 has not terminated. Waiting to terminate...
+2024-12-01 02:45:45,304 - discord.player - INFO - ffmpeg process 77484 should have terminated with a return code of 1.
+2024-12-01 02:49:22,090 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.15.10:5000
+2024-12-01 02:49:22,090 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-12-01 02:49:22,909 - discord.client - INFO - logging in using static token
+2024-12-01 02:49:23,877 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: b937777fc408f807d7f279a23a7490c1).
+2024-12-01 02:49:25,918 - discord - INFO - Logged in as THE FUNNY ONE#8336
+2024-12-01 02:49:33,670 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:49:33] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:49:52,225 - discord.voice_client - INFO - Connecting to voice...
+2024-12-01 02:49:52,226 - discord.voice_client - INFO - Starting voice handshake... (connection attempt 1)
+2024-12-01 02:49:52,825 - discord.voice_client - INFO - Voice handshake complete. Endpoint found brazil11181.discord.media
+2024-12-01 02:50:08,001 - bot.cogs.music - INFO - Successfully created FFmpeg audio source for: [4K] Dr. Livesey Phonk Walk (Full Version)
+2024-12-01 02:50:27,011 - bot.cogs.music - ERROR - Error in play_from_search_result: This interaction has already been responded to before
+2024-12-01 02:50:27,012 - discord.ui.view - ERROR - Ignoring exception in view <SearchResultView timeout=60.0 children=6> for item <Button style=<ButtonStyle.primary: 1> url=None disabled=False label='1' emoji=None row=0>
+Traceback (most recent call last):
+  File "J:\NODE\DiscordBot\bot\cogs\music.py", line 147, in play_from_search_result
+    await interaction.response.send_message(f"Added to queue: {video_data['title']}")
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\interactions.py", line 774, in send_message
+    raise InteractionResponded(self._parent)
+discord.errors.InteractionResponded: This interaction has already been responded to before
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\ui\view.py", line 427, in _scheduled_task
+    await item.callback(interaction)
+  File "J:\NODE\DiscordBot\bot\cogs\music.py", line 87, in callback
+    await self.cog.play_from_search_result(interaction, selected)
+  File "J:\NODE\DiscordBot\bot\cogs\music.py", line 151, in play_from_search_result
+    await interaction.response.send_message(f"An error occurred: {str(e)}")
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\interactions.py", line 774, in send_message
+    raise InteractionResponded(self._parent)
+discord.errors.InteractionResponded: This interaction has already been responded to before
+2024-12-01 02:50:33,360 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:50:33] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:50:39,349 - bot.cogs.music - ERROR - Error in play_from_search_result: This interaction has already been responded to before
+2024-12-01 02:50:39,349 - discord.ui.view - ERROR - Ignoring exception in view <SearchResultView timeout=60.0 children=6> for item <Button style=<ButtonStyle.primary: 1> url=None disabled=False label='4' emoji=None row=0>
+Traceback (most recent call last):
+  File "J:\NODE\DiscordBot\bot\cogs\music.py", line 147, in play_from_search_result
+    await interaction.response.send_message(f"Added to queue: {video_data['title']}")
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\interactions.py", line 774, in send_message
+    raise InteractionResponded(self._parent)
+discord.errors.InteractionResponded: This interaction has already been responded to before
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\ui\view.py", line 427, in _scheduled_task
+    await item.callback(interaction)
+  File "J:\NODE\DiscordBot\bot\cogs\music.py", line 87, in callback
+    await self.cog.play_from_search_result(interaction, selected)
+  File "J:\NODE\DiscordBot\bot\cogs\music.py", line 151, in play_from_search_result
+    await interaction.response.send_message(f"An error occurred: {str(e)}")
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\interactions.py", line 774, in send_message
+    raise InteractionResponded(self._parent)
+discord.errors.InteractionResponded: This interaction has already been responded to before
+2024-12-01 02:51:04,926 - bot.cogs.music - INFO - Using FFmpeg filter: -vn -b:a 192k -af "atempo=0.80,asetrate=44100*0.84,aresample=44100"
+2024-12-01 02:51:04,938 - discord.player - INFO - ffmpeg process 63584 has not terminated. Waiting to terminate...
+2024-12-01 02:51:04,942 - discord.player - INFO - ffmpeg process 63584 should have terminated with a return code of 1.
+2024-12-01 02:51:06,736 - bot.cogs.music - INFO - Successfully created FFmpeg audio source for: [4K] Dr. Livesey Phonk Walk (Full Version)
+2024-12-01 02:51:08,295 - bot.cogs.music - INFO - Successfully created FFmpeg audio source for: 9MM - Memphis Cult (Lyrics)
+2024-12-01 02:51:08,297 - discord.player - INFO - ffmpeg process 24648 has not terminated. Waiting to terminate...
+2024-12-01 02:51:08,302 - discord.player - INFO - ffmpeg process 24648 should have terminated with a return code of 1.
+2024-12-01 02:51:10,361 - bot.cogs.music - INFO - Successfully created FFmpeg audio source for: 9mm (Cassette Version)
+2024-12-01 02:51:10,363 - discord.player - INFO - ffmpeg process 79600 has not terminated. Waiting to terminate...
+2024-12-01 02:51:10,367 - discord.player - INFO - ffmpeg process 79600 should have terminated with a return code of 1.
+2024-12-01 02:51:33,636 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:51:33] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:53:24,375 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.15.10:5000
+2024-12-01 02:53:24,379 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-12-01 02:53:25,158 - discord.client - INFO - logging in using static token
+2024-12-01 02:53:25,982 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: acd0924a2fa4d1999d308dee64679cab).
+2024-12-01 02:53:28,001 - discord - INFO - Logged in as THE FUNNY ONE#8336
+2024-12-01 02:53:32,489 - discord.voice_client - INFO - Connecting to voice...
+2024-12-01 02:53:32,490 - discord.voice_client - INFO - Starting voice handshake... (connection attempt 1)
+2024-12-01 02:53:32,733 - discord.voice_client - INFO - Voice handshake complete. Endpoint found brazil11181.discord.media
+2024-12-01 02:53:33,680 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:53:33] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:53:49,339 - bot.cogs.music - INFO - Successfully created FFmpeg audio source for: 9MM - Memphis Cult (Lyrics)
+2024-12-01 02:54:04,960 - bot.cogs.music - ERROR - Error in play_from_search_result: This interaction has already been responded to before
+2024-12-01 02:54:04,961 - discord.ui.view - ERROR - Ignoring exception in view <SearchResultView timeout=60.0 children=6> for item <Button style=<ButtonStyle.primary: 1> url=None disabled=False label='1' emoji=None row=0>
+Traceback (most recent call last):
+  File "J:\NODE\DiscordBot\bot\cogs\music.py", line 147, in play_from_search_result
+    await interaction.response.send_message(f"Added to queue: {video_data['title']}")
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\interactions.py", line 774, in send_message
+    raise InteractionResponded(self._parent)
+discord.errors.InteractionResponded: This interaction has already been responded to before
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\ui\view.py", line 427, in _scheduled_task
+    await item.callback(interaction)
+  File "J:\NODE\DiscordBot\bot\cogs\music.py", line 87, in callback
+    await self.cog.play_from_search_result(interaction, selected)
+  File "J:\NODE\DiscordBot\bot\cogs\music.py", line 151, in play_from_search_result
+    await interaction.response.send_message(f"An error occurred: {str(e)}")
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\interactions.py", line 774, in send_message
+    raise InteractionResponded(self._parent)
+discord.errors.InteractionResponded: This interaction has already been responded to before
+2024-12-01 02:54:07,738 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:54:07] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:54:12,034 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:54:12] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:54:14,587 - bot.cogs.music - ERROR - Error in play_from_search_result: This interaction has already been responded to before
+2024-12-01 02:54:14,588 - discord.ui.view - ERROR - Ignoring exception in view <SearchResultView timeout=60.0 children=6> for item <Button style=<ButtonStyle.primary: 1> url=None disabled=False label='2' emoji=None row=0>
+Traceback (most recent call last):
+  File "J:\NODE\DiscordBot\bot\cogs\music.py", line 147, in play_from_search_result
+    await interaction.response.send_message(f"Added to queue: {video_data['title']}")
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\interactions.py", line 774, in send_message
+    raise InteractionResponded(self._parent)
+discord.errors.InteractionResponded: This interaction has already been responded to before
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\ui\view.py", line 427, in _scheduled_task
+    await item.callback(interaction)
+  File "J:\NODE\DiscordBot\bot\cogs\music.py", line 87, in callback
+    await self.cog.play_from_search_result(interaction, selected)
+  File "J:\NODE\DiscordBot\bot\cogs\music.py", line 151, in play_from_search_result
+    await interaction.response.send_message(f"An error occurred: {str(e)}")
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\interactions.py", line 774, in send_message
+    raise InteractionResponded(self._parent)
+discord.errors.InteractionResponded: This interaction has already been responded to before
+2024-12-01 02:54:16,729 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:54:16] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:54:22,022 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:54:22] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:54:26,864 - werkzeug - INFO - 127.0.0.1 - - [01/Dec/2024 02:54:26] "GET /api/stats HTTP/1.1" 200 -
+2024-12-01 02:54:30,061 - bot.cogs.music - ERROR - Error in play_from_search_result: This interaction has already been responded to before
+2024-12-01 02:54:30,061 - discord.ui.view - ERROR - Ignoring exception in view <SearchResultView timeout=60.0 children=6> for item <Button style=<ButtonStyle.primary: 1> url=None disabled=False label='1' emoji=None row=0>
+Traceback (most recent call last):
+  File "J:\NODE\DiscordBot\bot\cogs\music.py", line 147, in play_from_search_result
+    await interaction.response.send_message(f"Added to queue: {video_data['title']}")
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\interactions.py", line 774, in send_message
+    raise InteractionResponded(self._parent)
+discord.errors.InteractionResponded: This interaction has already been responded to before
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\ui\view.py", line 427, in _scheduled_task
+    await item.callback(interaction)
+  File "J:\NODE\DiscordBot\bot\cogs\music.py", line 87, in callback
+    await self.cog.play_from_search_result(interaction, selected)
+  File "J:\NODE\DiscordBot\bot\cogs\music.py", line 151, in play_from_search_result
+    await interaction.response.send_message(f"An error occurred: {str(e)}")
+  File "J:\NODE\DiscordBot\MusicBotVenv\lib\site-packages\discord\interactions.py", line 774, in send_message
+    raise InteractionResponded(self._parent)
+discord.errors.InteractionResponded: This interaction has already been responded to before
+2024-12-01 02:54:44,741 - bot.cogs.music - INFO - Using FFmpeg filter: -vn -b:a 192k -af "atempo=0.80,asetrate=44100*0.84,aresample=44100"
+2024-12-01 02:54:44,753 - discord.player - INFO - ffmpeg process 25060 has not terminated. Waiting to terminate...
+2024-12-01 02:54:44,757 - discord.player - INFO - ffmpeg process 25060 should have terminated with a return code of 1.
+2024-12-01 02:54:46,957 - bot.cogs.music - INFO - Successfully created FFmpeg audio source for: 9MM - Memphis Cult (Lyrics)
+2024-12-01 02:54:48,922 - bot.cogs.music - INFO - Successfully created FFmpeg audio source for: [4K] Dr. Livesey Phonk Walk (Full Version)
+2024-12-01 02:54:48,923 - discord.player - INFO - ffmpeg process 25816 has not terminated. Waiting to terminate...
+2024-12-01 02:54:48,927 - discord.player - INFO - ffmpeg process 25816 should have terminated with a return code of 1.
+2024-12-01 02:54:50,961 - bot.cogs.music - INFO - Successfully created FFmpeg audio source for: Dr livesey phonk walk
+2024-12-01 02:54:50,962 - discord.player - INFO - ffmpeg process 26608 has not terminated. Waiting to terminate...
+2024-12-01 02:54:50,965 - discord.player - INFO - ffmpeg process 26608 should have terminated with a return code of 1.
+2024-12-01 02:54:52,847 - bot.cogs.music - INFO - Successfully created FFmpeg audio source for: [4K] Dr. Livesey Phonk Walk (Full Version)
+2024-12-01 02:54:52,849 - discord.player - INFO - ffmpeg process 79412 has not terminated. Waiting to terminate...
+2024-12-01 02:54:52,853 - discord.player - INFO - ffmpeg process 79412 should have terminated with a return code of 1.
+2024-12-01 02:54:57,170 - bot.cogs.music - INFO - Using FFmpeg filter: -vn -b:a 192k -af "atempo=0.80,asetrate=44100*0.84,aresample=44100"
+2024-12-01 02:54:57,172 - discord.player - INFO - ffmpeg process 70168 has not terminated. Waiting to terminate...
+2024-12-01 02:54:57,176 - discord.player - INFO - ffmpeg process 70168 should have terminated with a return code of 1.
+2024-12-01 02:54:58,966 - bot.cogs.music - INFO - Successfully created FFmpeg audio source for: [4K] Dr. Livesey Phonk Walk (Full Version)
+2025-01-15 16:02:50,202 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.15.10:5000
+2025-01-15 16:02:50,202 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-01-15 16:02:50,623 - discord.client - INFO - logging in using static token
+2025-01-15 16:02:51,783 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: 5d5c563c6cfb6811ba04f070f37e212f).
+2025-01-15 16:02:53,818 - discord - INFO - Logged in as THE FUNNY ONE#8336
+2025-01-15 16:03:46,643 - discord.voice_client - INFO - Connecting to voice...
+2025-01-15 16:03:46,644 - discord.voice_client - INFO - Starting voice handshake... (connection attempt 1)
+2025-01-15 16:03:46,926 - discord.voice_client - INFO - Voice handshake complete. Endpoint found brazil11131.discord.media
+2025-01-15 16:03:54,504 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:03:54] "GET / HTTP/1.1" 200 -
+2025-01-15 16:03:54,962 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:03:54] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:03:55,142 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:03:55] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-01-15 16:03:59,969 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:03:59] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:04:04,969 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:04:04] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:04:09,964 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:04:09] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:04:15,332 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:04:15] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:04:19,971 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:04:19] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:04:24,528 - bot.cogs.music - INFO - Successfully created FFmpeg audio source for: Heroes of Might and Magic III - Cove Theme
+2025-01-15 16:04:24,973 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:04:24] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:04:29,103 - bot.cogs.music - INFO - Using FFmpeg filter: -vn -b:a 192k -af "atempo=0.80,asetrate=44100*0.84,aresample=44100"
+2025-01-15 16:04:29,111 - discord.player - INFO - ffmpeg process 42256 has not terminated. Waiting to terminate...
+2025-01-15 16:04:29,118 - discord.player - INFO - ffmpeg process 42256 should have terminated with a return code of 1.
+2025-01-15 16:04:30,096 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:04:30] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:04:30,140 - bot.cogs.music - INFO - Successfully created FFmpeg audio source for: Heroes of Might and Magic III - Cove Theme
+2025-01-15 16:04:34,972 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:04:34] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:04:39,973 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:04:39] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:04:45,752 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:04:45] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:04:50,830 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:04:50] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:04:55,766 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:04:55] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:05:00,769 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:05:00] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:05:05,762 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:05:05] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:05:10,753 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:05:10] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:05:15,760 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:05:15] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:05:20,764 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:05:20] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:05:24,975 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:05:24] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:05:30,753 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:05:30] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:05:35,758 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:05:35] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:05:40,753 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:05:40] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:05:45,759 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:05:45] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:05:50,845 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:05:50] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:05:55,760 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:05:55] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:06:00,765 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:06:00] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:06:05,765 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:06:05] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:06:10,753 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:06:10] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:06:15,756 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:06:15] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:06:20,763 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:06:20] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:06:25,763 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:06:25] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:06:28,334 - bot.cogs.music - INFO - Using FFmpeg filter: -vn -b:a 192k -af "atempo=1.10,asetrate=44100*1.15,aresample=44100"
+2025-01-15 16:06:28,342 - discord.player - INFO - ffmpeg process 21744 has not terminated. Waiting to terminate...
+2025-01-15 16:06:28,347 - discord.player - INFO - ffmpeg process 21744 should have terminated with a return code of 1.
+2025-01-15 16:06:29,417 - bot.cogs.music - INFO - Successfully created FFmpeg audio source for: Heroes of Might and Magic III - Cove Theme
+2025-01-15 16:06:50,841 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:06:50] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:07:50,834 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:07:50] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:08:50,846 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:08:50] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:09:00,448 - discord.player - INFO - ffmpeg process 43964 successfully terminated with return code of 0.
+2025-01-15 16:09:29,297 - bot.cogs.music - INFO - Successfully created FFmpeg audio source for: Phonk666
+2025-01-15 16:09:37,313 - bot.cogs.music - INFO - Using FFmpeg filter: -vn -b:a 192k -af "tremolo=f=5:d=0.9,flanger=delay=0:depth=2:speed=0.5:width=71:regen=10,chorus=0.5:0.9:50|60:0.4|0.32:0.25|0.4:2"
+2025-01-15 16:09:37,326 - discord.player - INFO - ffmpeg process 35844 has not terminated. Waiting to terminate...
+2025-01-15 16:09:37,331 - discord.player - INFO - ffmpeg process 35844 should have terminated with a return code of 1.
+2025-01-15 16:09:38,191 - bot.cogs.music - INFO - Successfully created FFmpeg audio source for: Phonk666
+2025-01-15 16:09:49,451 - bot.cogs.music - INFO - Using FFmpeg filter: -vn -b:a 192k -af "bass=g=+5dB"
+2025-01-15 16:09:49,455 - discord.player - INFO - ffmpeg process 47756 has not terminated. Waiting to terminate...
+2025-01-15 16:09:49,459 - discord.player - INFO - ffmpeg process 47756 should have terminated with a return code of 1.
+2025-01-15 16:09:50,332 - bot.cogs.music - INFO - Successfully created FFmpeg audio source for: Phonk666
+2025-01-15 16:09:50,834 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:09:50] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:10:50,824 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:10:50] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:11:20,770 - discord.player - INFO - ffmpeg process 7096 successfully terminated with return code of 0.
+2025-01-15 16:11:50,828 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:11:50] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:12:50,836 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:12:50] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:13:50,869 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:13:50] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:14:50,880 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:14:50] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:15:50,834 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:15:50] "GET /api/stats HTTP/1.1" 200 -

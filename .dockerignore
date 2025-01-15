@@ -1,0 +1,22 @@
+# ╔═══════════════════════════════════════════════════════════════════════════╗
+# ║  F3V3R DR34M Team Presents - DockerIgnore v1.0                              ║
+# ║  Crafted by Z4R1G4T4                                                        ║
+# ║  [2025] - Keep It Clean!                                                    ║
+# ╚═══════════════════════════════════════════════════════════════════════════╝
+
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env
+*.log
+.git
+.gitignore
+.dockerignore
+Dockerfile
+README.md
+*.md
+.DS_Store
