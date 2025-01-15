@@ -1,0 +1,22 @@
+{
+    "/*": "╔═══════════════════════════════════════════════════════════════════════════╗",
+    "/*": "║  F3V3R DR34M Team Presents - Configuration File v1.0                      ║",
+    "/*": "║  Crafted with <3 by Z4R1G4T4                                             ║",
+    "/*": "║  [2025] - Hack The Planet!                                               ║",
+    "/*": "╚═══════════════════════════════════════════════════════════════════════════╝",
+    
+    "ollama": {
+        "host": "localhost",
+        "port": 11434,
+        "model": "llama2:3.2",
+        "timeout": 30
+    },
+    "stable_diffusion": {
+        "host": "localhost",
+        "port": 7860,
+        "timeout": 60
+    },
+    "discord": {
+        "dashboard_port": 5000
+    }
+}

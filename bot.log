@@ -753,3 +753,77 @@ discord.errors.InteractionResponded: This interaction has already been responded
 2024-12-01 02:54:57,172 - discord.player - INFO - ffmpeg process 70168 has not terminated. Waiting to terminate...
 2024-12-01 02:54:57,176 - discord.player - INFO - ffmpeg process 70168 should have terminated with a return code of 1.
 2024-12-01 02:54:58,966 - bot.cogs.music - INFO - Successfully created FFmpeg audio source for: [4K] Dr. Livesey Phonk Walk (Full Version)
+2025-01-15 16:02:50,202 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.15.10:5000
+2025-01-15 16:02:50,202 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-01-15 16:02:50,623 - discord.client - INFO - logging in using static token
+2025-01-15 16:02:51,783 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: 5d5c563c6cfb6811ba04f070f37e212f).
+2025-01-15 16:02:53,818 - discord - INFO - Logged in as THE FUNNY ONE#8336
+2025-01-15 16:03:46,643 - discord.voice_client - INFO - Connecting to voice...
+2025-01-15 16:03:46,644 - discord.voice_client - INFO - Starting voice handshake... (connection attempt 1)
+2025-01-15 16:03:46,926 - discord.voice_client - INFO - Voice handshake complete. Endpoint found brazil11131.discord.media
+2025-01-15 16:03:54,504 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:03:54] "GET / HTTP/1.1" 200 -
+2025-01-15 16:03:54,962 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:03:54] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:03:55,142 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:03:55] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-01-15 16:03:59,969 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:03:59] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:04:04,969 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:04:04] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:04:09,964 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:04:09] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:04:15,332 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:04:15] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:04:19,971 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:04:19] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:04:24,528 - bot.cogs.music - INFO - Successfully created FFmpeg audio source for: Heroes of Might and Magic III - Cove Theme
+2025-01-15 16:04:24,973 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:04:24] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:04:29,103 - bot.cogs.music - INFO - Using FFmpeg filter: -vn -b:a 192k -af "atempo=0.80,asetrate=44100*0.84,aresample=44100"
+2025-01-15 16:04:29,111 - discord.player - INFO - ffmpeg process 42256 has not terminated. Waiting to terminate...
+2025-01-15 16:04:29,118 - discord.player - INFO - ffmpeg process 42256 should have terminated with a return code of 1.
+2025-01-15 16:04:30,096 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:04:30] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:04:30,140 - bot.cogs.music - INFO - Successfully created FFmpeg audio source for: Heroes of Might and Magic III - Cove Theme
+2025-01-15 16:04:34,972 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:04:34] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:04:39,973 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:04:39] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:04:45,752 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:04:45] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:04:50,830 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:04:50] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:04:55,766 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:04:55] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:05:00,769 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:05:00] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:05:05,762 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:05:05] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:05:10,753 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:05:10] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:05:15,760 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:05:15] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:05:20,764 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:05:20] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:05:24,975 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:05:24] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:05:30,753 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:05:30] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:05:35,758 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:05:35] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:05:40,753 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:05:40] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:05:45,759 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:05:45] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:05:50,845 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:05:50] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:05:55,760 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:05:55] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:06:00,765 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:06:00] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:06:05,765 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:06:05] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:06:10,753 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:06:10] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:06:15,756 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:06:15] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:06:20,763 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:06:20] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:06:25,763 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:06:25] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:06:28,334 - bot.cogs.music - INFO - Using FFmpeg filter: -vn -b:a 192k -af "atempo=1.10,asetrate=44100*1.15,aresample=44100"
+2025-01-15 16:06:28,342 - discord.player - INFO - ffmpeg process 21744 has not terminated. Waiting to terminate...
+2025-01-15 16:06:28,347 - discord.player - INFO - ffmpeg process 21744 should have terminated with a return code of 1.
+2025-01-15 16:06:29,417 - bot.cogs.music - INFO - Successfully created FFmpeg audio source for: Heroes of Might and Magic III - Cove Theme
+2025-01-15 16:06:50,841 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:06:50] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:07:50,834 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:07:50] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:08:50,846 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:08:50] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:09:00,448 - discord.player - INFO - ffmpeg process 43964 successfully terminated with return code of 0.
+2025-01-15 16:09:29,297 - bot.cogs.music - INFO - Successfully created FFmpeg audio source for: Phonk666
+2025-01-15 16:09:37,313 - bot.cogs.music - INFO - Using FFmpeg filter: -vn -b:a 192k -af "tremolo=f=5:d=0.9,flanger=delay=0:depth=2:speed=0.5:width=71:regen=10,chorus=0.5:0.9:50|60:0.4|0.32:0.25|0.4:2"
+2025-01-15 16:09:37,326 - discord.player - INFO - ffmpeg process 35844 has not terminated. Waiting to terminate...
+2025-01-15 16:09:37,331 - discord.player - INFO - ffmpeg process 35844 should have terminated with a return code of 1.
+2025-01-15 16:09:38,191 - bot.cogs.music - INFO - Successfully created FFmpeg audio source for: Phonk666
+2025-01-15 16:09:49,451 - bot.cogs.music - INFO - Using FFmpeg filter: -vn -b:a 192k -af "bass=g=+5dB"
+2025-01-15 16:09:49,455 - discord.player - INFO - ffmpeg process 47756 has not terminated. Waiting to terminate...
+2025-01-15 16:09:49,459 - discord.player - INFO - ffmpeg process 47756 should have terminated with a return code of 1.
+2025-01-15 16:09:50,332 - bot.cogs.music - INFO - Successfully created FFmpeg audio source for: Phonk666
+2025-01-15 16:09:50,834 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:09:50] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:10:50,824 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:10:50] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:11:20,770 - discord.player - INFO - ffmpeg process 7096 successfully terminated with return code of 0.
+2025-01-15 16:11:50,828 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:11:50] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:12:50,836 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:12:50] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:13:50,869 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:13:50] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:14:50,880 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:14:50] "GET /api/stats HTTP/1.1" 200 -
+2025-01-15 16:15:50,834 - werkzeug - INFO - 127.0.0.1 - - [15/Jan/2025 16:15:50] "GET /api/stats HTTP/1.1" 200 -
